@@ -47,3 +47,13 @@
 5.	Évaluation Continue et Optimisation
 	•	Metre en place des protocoles d’évaluation pour mesurer la précision, la pertinence et la satisfaction des utilisateurs.
 	•	Optimiser les performances en surveillant les temps de latence et l’utilisation des ressources.
+
+
+Réaliser un benchmark des modèles d'embedding open source.
+Collecter et préparer des données adaptées.
+Automatiser la génération du dataset pour l'entraînement.
+Effectuer un further finetuning du modèle.
+Évaluer les performances avec :
+
+Les données spécifiques de la Banque de France.
+Le benchmark MTEB pour une évaluation standardisée.

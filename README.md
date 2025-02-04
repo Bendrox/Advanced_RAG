@@ -1,6 +1,6 @@
 # Advanced-RAG
 
-### Checklist pour un Projet RAG lvl 1 - Beginning:   
+### Checklist pour un Projet RAG lvl 1 :   
 1.	Définition des Objectifs
 	•	Identifier clairement les cas d ’utilisation et les objectifs du projet.
 

@@ -1,8 +1,8 @@
 # Advanced-RAG
 
-### Checklist pour un Projet RAG lvl 1 - Beginning: 
+### Checklist pour un Projet RAG lvl 1 - Beginning:   
 1.	Définition des Objectifs
-	•	Identifier clairement les cas d’utilisation et les objectifs du projet.
+	•	Identifier clairement les cas d ’utilisation et les objectifs du projet.
 
 2.	Collecte et Préparation des Données
 	•	Rassembler les sources de données pertinentes (documents, bases de données, etc.).
@@ -47,3 +47,6 @@
 5.	Évaluation Continue et Optimisation
 	•	Mettre en place des protocoles d’évaluation pour mesurer la précision, la pertinence et la satisfaction des utilisateurs.
 	•	Optimiser les performances en surveillant les temps de latence et l’utilisation des ressources.
+
+
+    All version

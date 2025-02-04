@@ -1,6 +1,6 @@
 # Advanced-RAG
 
-### Checklist pour un Projet RAG Standard: 
+### Checklist pour un Projet RAG lvl 1: 
 1.	Définition des Objectifs
 	•	Identifier clairement les cas d’utilisation et les objectifs du projet.
 
@@ -24,3 +24,26 @@
 7.	Évaluation et Tests
 	•	Tester le système pour s’assurer de sa précision et de sa pertinence.
 	•	Recueillir les retours des utilisateurs pour des améliorations continues.
+
+
+### Checklist pour un Projet RAG lvl 2: 
+1.	Amélioration de la Qualité des Données
+	•	Mettre en place des processus pour garantir la fraîcheur et la diversité des données.
+	•	Utiliser des techniques d’augmentation de données pour enrichir le corpus.
+
+2.	Optimisation du Composant de Récupération
+	•	Évaluer et améliorer la vitesse et la précision du processus de récupération.
+	•	Mettre en œuvre des techniques de réécriture de requêtes et de reranking pour améliorer les résultats.
+
+3.	Amélioration du Composant de Génération
+	•	Assurer la cohérence et la pertinence des réponses générées.
+	•	Intégrer des mécanismes pour éviter les “hallucinations” du modèle.
+
+4.	Techniques Avancées
+	•	Auto-Réflexion (Self-Reflective RAG) : Permettre au modèle d’évaluer de manière autonome la nécessité d’informations externes et la qualité de ses réponses.
+	•	RAG Correctif (Corrective RAG) : Évaluer la qualité des documents récupérés et décider de leur utilisation ou de la nécessité de recherches supplémentaires.
+	•	Fusion RAG (RAG Fusion) : Générer des requêtes dérivées et combiner les documents récupérés pour fournir des réponses plus complètes.
+
+5.	Évaluation Continue et Optimisation
+	•	Mettre en place des protocoles d’évaluation pour mesurer la précision, la pertinence et la satisfaction des utilisateurs.
+	•	Optimiser les performances en surveillant les temps de latence et l’utilisation des ressources.

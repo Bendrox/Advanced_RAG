@@ -40,13 +40,10 @@
 	•	Intégrer des mécanismes pour éviter les “hallucinations” du modèle.
 
 4.	Techniques Avancées
-	•	Auto-Réflexion (Self-Reflective RAG) : Permettre au modèle d’évaluer de manière autonome la nécessité d’informations externes et la qualité de ses réponses.
+	•	Auto-Réflexion (Slf-Reflective RAG) : Permettre au modèle d’évaluer de manière autonome la nécessité d’informatios externes et la qualité de ses réponses.
 	•	RAG Correctif (Corrective RAG) : Évaluer la qualité des documents récupérés et décider de leur utilisation ou de la nécessité de recherches supplémentaires.
 	•	Fusion RAG (RAG Fusion) : Générer des requêtes dérivées et combiner les documents récupérés pour fournir des réponses plus complètes.
 
 5.	Évaluation Continue et Optimisation
-	•	Mettre en place des protocoles d’évaluation pour mesurer la précision, la pertinence et la satisfaction des utilisateurs.
+	•	Metre en place des protocoles d’évaluation pour mesurer la précision, la pertinence et la satisfaction des utilisateurs.
 	•	Optimiser les performances en surveillant les temps de latence et l’utilisation des ressources.
-
-
-    All version

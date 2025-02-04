@@ -50,10 +50,11 @@
 
 
 Réaliser un benchmark des modèles d'embedding open source.
-Collecter et préparer des données adaptées.
-Automatiser la génération du dataset pour l'entraînement.
-Effectuer un further finetuning du modèle.
-Évaluer les performances avec :
 
-Les données spécifiques de la Banque de France.
-Le benchmark MTEB pour une évaluation standardisée.
+Collecter et préparer des données adaptées.
+
+Automatiser la génération du dataset pour l'entraînement.
+
+Effectuer un further finetuning du modèle.
+
+Évaluer les performances avec le benchmark MTEB pour une évaluation standardisée.

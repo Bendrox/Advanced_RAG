@@ -1,6 +1,6 @@
 # Advanced-RAG
 
-### Checklist pour un Projet RAG lvl 1: 
+### Checklist pour un Projet RAG lvl 1 - Beginning: 
 1.	Définition des Objectifs
 	•	Identifier clairement les cas d’utilisation et les objectifs du projet.
 
@@ -26,7 +26,7 @@
 	•	Recueillir les retours des utilisateurs pour des améliorations continues.
 
 
-### Checklist pour un Projet RAG lvl 2: 
+### Checklist pour un Projet RAG lvl 2 - advanced: 
 1.	Amélioration de la Qualité des Données
 	•	Mettre en place des processus pour garantir la fraîcheur et la diversité des données.
 	•	Utiliser des techniques d’augmentation de données pour enrichir le corpus.

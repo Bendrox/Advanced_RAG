@@ -1,5 +1,5 @@
-from models.llm_models import *
-from models.embedding_models import *
+from models.llm_models import llm_4omini, llm_4o
+from models.embedding_models import embeddings
 
 prompt = "Fais une blague sur les actuaires"
 

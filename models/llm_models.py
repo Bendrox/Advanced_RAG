@@ -1,8 +1,8 @@
 
 from langchain_openai import AzureChatOpenAI
 from langchain.embeddings import OpenAIEmbeddings, AzureOpenAIEmbeddings
-import io
-import sys
+from langchain.embeddings import AzureOpenAIEmbeddings
+
 from dotenv import load_dotenv
 import os
 
@@ -34,3 +34,9 @@ embeddings = AzureOpenAIEmbeddings(
     openai_api_version="2023-05-15",
     chunk_size=1000
 )
+
+def llm_stream_response(model:str, prompt):
+    "Envoi au llm et affiche réponse en direct"
+    for chunk in model.stream(prompt):
+        print(chunk.content, end="", flush=True)
+        

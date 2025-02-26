@@ -1,7 +1,7 @@
 
 from langchain_openai import AzureChatOpenAI
-from langchain.embeddings import OpenAIEmbeddings, AzureOpenAIEmbeddings
-from langchain.embeddings import AzureOpenAIEmbeddings
+#from langchain_community.embeddings import AzureOpenAIEmbeddings
+from langchain_openai import AzureOpenAIEmbeddings
 
 from dotenv import load_dotenv
 import os

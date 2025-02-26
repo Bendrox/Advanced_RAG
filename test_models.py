@@ -5,13 +5,13 @@ prompt = "Réponds en un mot"
 
 # test 1
 if not llm_4omini.invoke(prompt):
-    raise AssertionError("Erreur : Gpt 4o mini ne fonctionne pas.")
+    raise AssertionError("Erreur : Gpt 4o mini succeded test run.")
 else:
     print("Gpt 4o mini fonctionne avec succès")
     
 # test 2    
 if not llm_4o.invoke(prompt):
-    raise AssertionError("Erreur : Gpt 4o ne fonctionne pas.")
+    raise AssertionError("Erreur : Gpt 4o succeded test run.")
 else:
     print("Gpt 4o fonctionne avec succès")
 

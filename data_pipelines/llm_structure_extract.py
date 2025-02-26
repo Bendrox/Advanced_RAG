@@ -22,3 +22,5 @@ def extract_structure_with_llm(model,document):
     for chunk in model.stream(prompt_structure_extract_json):
         print(chunk.content, end="", flush=True) 
         result = chunk.content
+        
+

@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from langchain_community.embeddings import AzureOpenAIEmbeddings
+from langchain_openai import AzureOpenAIEmbeddings
 import os
 
 

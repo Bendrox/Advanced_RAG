@@ -5,20 +5,20 @@ prompt = "Réponds en un mot"
 
 # test 1
 if not llm_4omini.invoke(prompt):
-    raise AssertionError("Erreur : Gpt 4o mini succeded test run.")
+    raise AssertionError("Error : Gpt4o mini failed test run")
 else:
-    print("Gpt 4o mini fonctionne avec succès")
+    print("Gpt4o mini succeded test run! ")
     
 # test 2    
 if not llm_4o.invoke(prompt):
-    raise AssertionError("Erreur : Gpt 4o succeded test run.")
+    raise AssertionError("Error : Gpt4o failed test run")
 else:
-    print("Gpt 4o fonctionne avec succès")
+    print("Gpt4o succeded test run !")
 
 # test embedding:
 sentence1 = "test"
 emb1 = embeddings.embed_query(sentence1)
 if not sentence1:
-    raise AssertionError("Erreur : la phrase d'entrée pour l'embedding est vide.")
+    raise AssertionError("Error : embedding failed test run")
 else:
-    print(f"Test Embedding généré avec succès")
+    print(f"Test Embedding succeded !")

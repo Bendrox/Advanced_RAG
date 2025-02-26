@@ -27,13 +27,6 @@ llm_4omini = AzureChatOpenAI(
     deployment_name="gpt4o-mini")
     #streaming=True
     
-embeddings = AzureOpenAIEmbeddings(
-    model="text-embedding-3-large",
-    azure_endpoint=os.getenv('Azure_OpenAI_emb_3_large_azure_endpoint'),
-    openai_api_key=os.getenv('Azure_OpenAI_emb_3_large_api_key'),
-    openai_api_version="2023-05-15",
-    chunk_size=1000
-)
 
 def llm_stream_response(model:str, prompt):
     "Envoi au llm et affiche réponse en direct"

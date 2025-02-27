@@ -1,11 +1,13 @@
 #importing
 from data_pipelines.url_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
 from data_pipelines.token_counter import count_tokens
+from data_pipelines.pdf_txt_loader import load_txt
 from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
                                           nettoyer_markdown, weird_carac_remove, 
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
+from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 
 # Step 1: inject URL for Firecrawl
 print("Début de l'étape 1: injection des liens")
@@ -36,9 +38,15 @@ diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_5)
 print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
 
 # step 5: Option 1: LCQA - Long context Question answering 
-lcqa_3p_res= get_eu_data_3p()
+print("Début de l'étape 5: Long context Question answering")
 
-lcqa_4p_res=get_eu_data_4p()
+art_1_old = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_old.txt")
+art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_new.txt")
+
+lcqa_3p_res= get_eu_data_3p(llm_4o,scrape_result_5,art_1_old, art_1_new )
+lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_5,art_1_old, art_1_new)
+
+print("Début de l'étape 5: Long context Question answering")
 
 # step 6:
 

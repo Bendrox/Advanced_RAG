@@ -21,9 +21,9 @@ def get_eu_data_3p(llm_model, reglement_ue, fr_old_version, fr_new_version):
         Voici le texte de loi francais dans sa version avant l'entree en vigueur du text européen: {fr_old_version}
         Voici le texte de loi francais dans sa version après l'entree en vigueur du text européen: {fr_new_version}
 """
-    for chunk in llm_model.stream(prompt_LCQA_3p):
-        print(chunk.content, end="", flush=True)
 
+    output = llm_model.invoke(prompt_LCQA_3p)
+    return output
 
 def get_eu_data_4p(llm_model, reglement_ue, fr_old_version, fr_new_version):
     changement_derter= comparer_phrases(fr_old_version, fr_new_version)
@@ -49,8 +49,9 @@ def get_eu_data_4p(llm_model, reglement_ue, fr_old_version, fr_new_version):
             trouver la partie du texte europeen a l origine de ce changement : {changement_derter}
 
     """
-    for chunk in llm_model.stream(prompt_LCQA_4p):
-        print(chunk.content, end="", flush=True)
+
+    output = llm_model.invoke(prompt_LCQA_4p)
+    return output
         
                     
         

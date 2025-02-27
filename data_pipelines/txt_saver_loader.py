@@ -12,7 +12,7 @@ def load_txt(filepath: str):
     with open(filepath, "r", encoding="utf-8") as file:
         return file.read()
     
-    
+   
 def save_txt(filepath: str, text: str):
     """
     Sauvegarde le texte donné dans un fichier .txt.

@@ -1,23 +1,37 @@
 #importing
 from data_pipelines.url_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
 from data_pipelines.token_counter import count_tokens
-from data_pipelines.pdf_txt_loader import load_txt
+from data_pipelines.txt_saver_loader import load_txt
 from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
                                           nettoyer_markdown, weird_carac_remove, 
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response
+from data_pipelines.txt_saver_loader import load_txt, save_txt
+
+import os 
 
 # Step 1: inject URL for Firecrawl
 print("Début de l'étape 1: injection des liens")
-url_aml_5="http://publications.europa.eu/resource/celex/32015L0849"
+url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
 url_crr="http://publications.europa.eu/resource/celex/32013R0575"
 print("Etape 1 terminée")
 
 # step 2: scraping data with firecrawl
-print("Début de l'étape 2: récupération des données avec firecrawl ")
-scrape_result = firecrawl_extractor_mrkd(url_aml_5)
+print("Début de l'étape 2: récupération des données avec firecrawl ou chargement depuis fichier local")
+
+if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt"): 
+    print("Etape 2: Fichier n'existe pas , appel a Firecrawl pour récupération")
+    scrape_result = firecrawl_extractor_mrkd(url_aml5)
+    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt",scrape_result)
+else:
+    print("Etape 2: fichier existe récupération a partir du fichier local")
+    scrape_result= load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt")
+    
+#scrape_result = firecrawl_extractor_mrkd(url_aml5)
+#save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt",scrape_result)
+
 print("Etape 2 terminée")
 
 # step 3: calcul nombre de token de l'extraction brute 
@@ -43,10 +57,15 @@ print("Début de l'étape 5: Long context Question answering")
 art_1_old = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_old.txt")
 art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_new.txt")
 
-lcqa_3p_res= get_eu_data_3p(llm_4o,scrape_result_5,art_1_old, art_1_new )
+lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_5,art_1_old, art_1_new )
+lcqa_3p_res = str(lcqa_3p_res)
 lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_5,art_1_old, art_1_new)
+lcqa_4p_res = str(lcqa_4p_res)
 
-print("Début de l'étape 5: Long context Question answering")
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output/llm_rep_3p.txt",lcqa_3p_res)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output/llm_rep_4p.txt",lcqa_4p_res)
+
+print("Fin de l'étape 5: Long context Question answering")
 
 # step 6:
 

@@ -1,5 +1,4 @@
 
-
 def supr_avant_directive_mrk(texte):
     start_phrase = "ONT ADOPTÉ LA PRÉSENTE DIRECTIVE:\n\nCHAPITRE I"
     index_debut = texte.find(start_phrase)

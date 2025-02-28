@@ -19,3 +19,6 @@ def chunker_optimal(input_data_to_chunk):
     chunk_overlap=0)
     chunks= article_splitter.split_text(input_data_to_chunk)
     return chunks
+
+def chunks_list_dict():
+chunks_aml5_dic = {item[:10]: item[10:].lstrip() for item in chunks_aml5}

@@ -23,6 +23,7 @@ def get_eu_data_3p(llm_model, reglement_ue, fr_old_version, fr_new_version):
 """
 
     output = llm_model.invoke(prompt_LCQA_3p)
+    output= output.content
     return output
 
 def get_eu_data_4p(llm_model, reglement_ue, fr_old_version, fr_new_version):
@@ -51,6 +52,7 @@ def get_eu_data_4p(llm_model, reglement_ue, fr_old_version, fr_new_version):
     """
 
     output = llm_model.invoke(prompt_LCQA_4p)
+    output= output.content
     return output
         
                     

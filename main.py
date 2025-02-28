@@ -1,4 +1,4 @@
-#importing
+# Importing data pipelines
 from data_pipelines.url_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
 from data_pipelines.token_counter import count_tokens
 from data_pipelines.txt_saver_loader import load_txt
@@ -6,10 +6,14 @@ from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_d
                                           nettoyer_markdown, weird_carac_remove, 
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
-from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
-from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 from data_pipelines.txt_saver_loader import load_txt, save_txt
 
+## importing LLM
+from llm_tools.chunker import chunker_optimal
+from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
+from models.llm_models import llm_4o, llm_4omini, llm_stream_response
+
+# Global import 
 import os 
 
 ###### Step 1: inject URL for Firecrawl
@@ -65,7 +69,12 @@ save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep
 
 print("Fin de l'étape 5: Long context Question answering")
 
-###### Step 6:
+###### Step 6: RAG 
+print("Début de l'étape 6: RAG building")
 
+# chunking 
+print("Début de l'étape 6.1: chunking")
+chunks = chunker_optimal(scrape_result_5)
+print("Fin de l'étape 6.1: chunking")
 
 ###### Step 7:

@@ -12,13 +12,13 @@ from data_pipelines.txt_saver_loader import load_txt, save_txt
 
 import os 
 
-# Step 1: inject URL for Firecrawl
+###### Step 1: inject URL for Firecrawl
 print("Début de l'étape 1: injection des liens")
 url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
 url_crr="http://publications.europa.eu/resource/celex/32013R0575"
 print("Etape 1 terminée")
 
-# step 2: scraping data with firecrawl
+###### Step 2: scraping data with firecrawl
 print("Début de l'étape 2: récupération des données avec firecrawl ou chargement depuis fichier local")
 
 if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt"): 
@@ -29,17 +29,14 @@ else:
     print("Etape 2: fichier existe récupération a partir du fichier local")
     scrape_result= load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt")
     
-#scrape_result = firecrawl_extractor_mrkd(url_aml5)
-#save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt",scrape_result)
-
 print("Etape 2 terminée")
 
-# step 3: calcul nombre de token de l'extraction brute 
+###### Step 3: calcul nombre de token de l'extraction brute 
 print("Début de l'étape 3: calcul du nombre de token de l'extraction brute")
 print(f"Le nombre de count_tokens du texte brute est de : {count_tokens(scrape_result)}")
 print("Etape 3 terminée")
 
-# step 4: Netoyage du text brut 
+####### Step 4: Netoyage du text brut 
 print("Début de l'étape 4: Netoyage du text brut (en 5 étapes)")
 scrape_result_1= supr_avant_directive_mrk(scrape_result)
 scrape_result_2= supr_apres_directive_mrk(scrape_result_1)
@@ -51,7 +48,7 @@ print(f"Nombre de token après nettoyage du text: {count_tokens(scrape_result_5)
 diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_5)
 print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
 
-# step 5: Option 1: LCQA - Long context Question answering 
+###### Step 5: Option 1: LCQA - Long context Question answering 
 print("Début de l'étape 5: Long context Question answering")
 
 # load test data
@@ -68,6 +65,7 @@ save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep
 
 print("Fin de l'étape 5: Long context Question answering")
 
-# step 6:
+###### Step 6:
 
-# step 7:
+
+###### Step 7:

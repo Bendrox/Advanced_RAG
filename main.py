@@ -62,8 +62,8 @@ lcqa_3p_res = str(lcqa_3p_res)
 lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_5,art_1_old, art_1_new)
 lcqa_4p_res = str(lcqa_4p_res)
 
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output/llm_rep_3p.txt",lcqa_3p_res)
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output/llm_rep_4p.txt",lcqa_4p_res)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
 
 print("Fin de l'étape 5: Long context Question answering")
 

@@ -54,14 +54,15 @@ print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
 # step 5: Option 1: LCQA - Long context Question answering 
 print("Début de l'étape 5: Long context Question answering")
 
+# load test data
 art_1_old = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_old.txt")
 art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_new.txt")
 
-lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_5,art_1_old, art_1_new )
-lcqa_3p_res = str(lcqa_3p_res)
+# Inject data for QA 
+lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_5,art_1_old, art_1_new)
 lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_5,art_1_old, art_1_new)
-lcqa_4p_res = str(lcqa_4p_res)
 
+# save llm response 
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
 

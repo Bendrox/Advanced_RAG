@@ -1,1 +1,135 @@
-content='Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l\'origine de ces changements, nous devons examiner les modifications spécifiques apportées au texte français et les comparer avec les dispositions de la directive européenne. Voici une analyse détaillée des changements :\n\n1. **Remplacer \'paiement,\' par \'paiement et\'** :\n   - **Changement** : Ajout de "et" après "paiement".\n   - **Directive UE** : Article 2(1)(3)(a) - "les établissements de crédit; les établissements financiers; les personnes physiques ou morales suivantes, agissant dans l\'exercice de leur activité professionnelle: les auditeurs, experts-comptables externes et conseillers fiscaux; les notaires et autres membres de professions juridiques indépendantes, lorsqu\'ils participent, au nom de leur client et pour le compte de celui-ci, à toute transaction financière ou immobilière ou lorsqu\'ils assistent leur client dans la préparation ou l\'exécution de transactions portant sur: l\'achat et la vente de biens immeubles ou d\'entreprises commerciales; la gestion de fonds, de titres ou d\'autres actifs appartenant au client; l\'ouverture ou la gestion de comptes bancaires, d\'épargne ou de portefeuilles; l\'organisation des apports nécessaires à la constitution, à la gestion ou à la direction de sociétés; la constitution, la gestion ou la direction de fiducies/trusts, de sociétés, de fondations ou de structures similaires; les prestataires de services aux sociétés et aux fiducies/trusts qui ne relèvent pas déjà du point a) ou du point b); les agents immobiliers; les autres personnes négociant des biens, dans la mesure où les paiements sont effectués ou reçus en espèces pour un montant égal ou supérieur à 10 000 EUR, que la transaction soit exécutée en une fois ou sous la forme d\'opérations fractionnées qui semblent être liées; les prestataires de services de jeux d\'argent et de hasard."\n\n2. **Supprimer \'et les prestataires de services sur crypto-actifs\'** :\n   - **Changement** : Suppression de la mention des prestataires de services sur crypto-actifs.\n   - **Directive UE** : Article 2(1)(3)(a) - La directive ne mentionne pas spécifiquement les prestataires de services sur crypto-actifs, ce qui pourrait expliquer la suppression dans la loi française.\n\n3. **Supprimer \'ou d\'une ou plusieurs personnes en vue de la fourniture de services sur cryptoactifs\'** :\n   - **Changement** : Suppression de la mention des personnes fournissant des services sur crypto-actifs.\n   - **Directive UE** : Article 2(1)(3)(a) - Même justification que pour le point précédent.\n\n4. **Remplacer \'l\'article\' par \'l\' article\'** :\n   - **Changement** : Correction typographique.\n   - **Directive UE** : Non applicable (correction de forme).\n\n5. **Remplacer \'721-7\' par \'711-2\'** :\n   - **Changement** : Mise à jour de la référence législative.\n   - **Directive UE** : Non applicable (mise à jour de référence interne).\n\n6. **Remplacer \'721-18 et L. 721-19\' par \'712-4\'** :\n   - **Changement** : Mise à jour de la référence législative.\n   - **Directive UE** : Non applicable (mise à jour de référence interne).\n\n7. **Remplacer \'532-48\' par \'532-48,\'** :\n   - **Changement** : Correction typographique.\n   - **Directive UE** : Non applicable (correction de forme).\n\n8. **Remplacer \'440-2,\' par \'440-2 ,\'** :\n   - **Changement** : Correction typographique.\n   - **Directive UE** : Non applicable (correction de forme).\n\n9. **Remplacer \'421-2,\' par \'421-2 ,\'** :\n   - **Changement** : Correction typographique.\n   - **Directive UE** : Non applicable (correction de forme).\n\n10. **Supprimer \'mentionnés aux 1° et 2° du I de l\'article L. 441-1\'** :\n    - **Changement** : Suppression de la mention des articles spécifiques.\n    - **Directive UE** : Article 2(1)(3)(a) - La directive ne mentionne pas spécifiquement ces articles, ce qui pourrait expliquer la suppression.\n\n11. **Remplacer \'prestataires de services de financement participatif au titre de leurs activités mentionnées à l\'article L. 547-4\' par \'conseillers en investissements participatifs\'** :\n    - **Changement** : Modification de la terminologie.\n    - **Directive UE** : Article 2(1)(3)(a) - La directive utilise une terminologie plus générale, ce qui pourrait expliquer la modification.\n\n12. **Remplacer \'211-4,\' par \'211-4 ,\'** :\n    - **Changement** : Correction typographique.\n    - **Directive UE** : Non applicable (correction de forme).\n\n13. **Remplacer \'l\'article\' par \'l\' article\'** :\n    - **Changement** : Correction typographique.\n    - **Directive UE** : Non applicable (correction de forme).\n\n14. **Supprimer \'a)\'** :\n    - **Changement** : Suppression de la subdivision.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n15. **Remplacer \'à 4° de l\'article L. 54-10-2, et ; b) Les prestataires des services autorisés à fournir des services sur crypto-actifs conformément à l\'article 59 du règlement (UE) 2023/1114 du Parlement européen et du Conseil du 31 mai 2023 sur les marchés de crypto-actifs et modifiant les règlements (UE) n° 1093/2010 et (UE) n° 1095/2010 et les directives 2013/36/ UE et (UE) 2019/1937, y compris les succursales établies en France des prestataires\' par \'et 2° de l\'article L. 54-10-2 ; 7° ter Les émetteurs de jetons\'** :\n    - **Changement** : Simplification et réorganisation de la structure.\n    - **Directive UE** : Article 2(1)(3)(a) - La directive ne mentionne pas spécifiquement les prestataires de services sur crypto-actifs, ce qui pourrait expliquer la simplification.\n\n16. **Remplacer \'leur siège social\' par \'obtenu le visa mentionné à l\'article L. 552-4\'** :\n    - **Changement** : Mise à jour de la référence législative.\n    - **Directive UE** : Non applicable (mise à jour de référence interne).\n\n17. **Remplacer \'un autre Etat membre de l\'Union européenne ou partie à l\'Espace économique européen à l\'exception de ceux mentionnés au b du\' par \'le cadre de l\'offre ayant fait l\'objet du visa et dans la limite des transactions avec les souscripteurs prenant part à cette offre ;\'** :\n    - **Changement** : Mise à jour de la référence législative.\n    - **Directive UE** : Non applicable (mise à jour de référence interne).\n\n18. **Supprimer \'du présent article ; 7° ter (Abrogé) ; 7° quater a)\'** :\n    - **Changement** : Suppression de subdivisions.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n19. **Supprimer \'a du\'** :\n    - **Changement** : Suppression de subdivisions.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n20. **Remplacer \'et b) Les conseillers en investissements financiers, dépositaires centraux et sociétés de gestion de placements collectifs mentionnées à l\'article L. 543-1 autorisés à fournir des services sur crypto-actifs conformément à l\'article 59 du règlement (UE) 2023/1114 du Parlement européen et du Conseil du 31 mai 2023 sur les marchés de crypto actifs et modifiant les règlements (UE) n° 1093/2010 et (UE) n° 1095/2010 et les directives 2013/36/ UE et (UE) 2019/1937, y compris les succursales établies en France des sociétés de gestion européennes d\'OPCVM et de FIA\' par \'8° Les personnes exerçant les activités\'** :\n    - **Changement** : Simplification et réorganisation de la structure.\n    - **Directive UE** : Article 2(1)(3)(a) - La directive ne mentionne pas spécifiquement les prestataires de services sur crypto-actifs, ce qui pourrait expliquer la simplification.\n\n21. **Remplacer \'articles L. 532-20-1 et L. 532-21-3 ayant leur siège social dans un autre Etat membre de l\'Union européenne ou partie à l\'Espace économique européen ou les prestataires de services autorisés\' par \'1°,\'** :\n    - **Changement** : Simplification et réorganisation de la structure.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n22. **Remplacer \'pour fournir les services de gestion de portefeuille de crypto-actifs ou de conseils en crypto-actifs mentionnés respectivement au i et au h du point 16 du paragraphe 1 de l\'article 3 du même règlement ; 8° Les personnes exerçant les activités mentionnées au 1°, mais concernant\' par \'en ce qui concerne\'** :\n    - **Changement** : Simplification et réorganisation de la structure.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n23. **Supprimer \'uniquement\'** :\n    - **Changement** : Suppression de termes redondants.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n24. **Supprimer \'ainsi qu\'aux\'** :\n    - **Changement** : Suppression de termes redondants.\n    - **Directive UE** : Non applicable (simplification de la structure).\n\n25. **Remplacer \'11°\' par \'12° Les experts-comptables, les salariés autorisés à exercer la profession d\'expert-comptable en application des articles 83 ter et 83 quater de l\'ordonnance n° 45-2138 du 19 septembre 1945 portant institution de l\'ordre des experts-comptables et réglementant les titres et la profession d\'expert-comptable ; 12°\'** :\n    - **Changement** : Réorganisation de la numérotation.\n    - **Directive UE** : Non applicable (réorganisation interne).\n\n26. **Remplacer \'personnes, autres que celles mentionnées\' par \'commissaires\'** :\n    - **Changement** : Simplification de la terminologie.\n    - **Directive UE** : Non applicable (simplification de la terminologie).\n\n27. **Remplacer \'1° à 7° quater, se livrant à titre habituel et principal\' par \'comptes ; 13° Les avocats\'** :\n    - **Changement** : Réorganisation de la numérotation.\n    - **Directive UE** : Non applicable (réorganisation interne).\n\n28. **Remplacer \'commerce de métaux précieux ou de pierres précieuses,\' par \'Conseil d\'Etat et à la Cour de cassation, les avocats, les notaires, les huissiers de justice, les administrateurs judiciaires, les mandataires judiciaires et les commissaires-priseurs judiciaires, dans les conditions prévues à l\'article L. 561-3 ; 14° Les opérateurs de ventes volontaires de meubles aux enchères publiques\'** :\n    - **Changement** : Réorganisation de la numérotation.\n    - **Directive UE** : Non applicable (réorganisation interne).\n\n29. **Supprimer \'12° Les experts-comptables, les salariés autorisés à exercer la profession d\'expert-comptable en application des articles 83 ter et 83 quater de l\'ordonnance n° 45-2138 du 19 septembre 1945 portant institution de l\'ordre des experts-comptables et réglementant les titres et la profession d\'expert-comptable ; 12° bis Les commissaires aux comptes ; 13° Les avocats au Conseil d\'Etat et à la Cour de cassation, les avocats, les notaires, les commissaires de justice, les administrateurs judiciaires et les mandataires judiciaires, dans les conditions prévues à l\'article L. 561-3 ; 14° Les opérateurs de ventes volontaires de meubles aux enchères publiques lorsque la valeur de la transaction ou d\'une série de transactions liées est d\'un montant égal ou supérieur à 10 000 euros ;\'** :\n    - **Changement** : Réorganisation de la numérotation.\n    - **Directive UE** : Non applicable (réorganisation interne).\n\n30. **Remplacer \'l\'article\' par \'l\' article\'** :\n    - **Changement** : Correction typographique.\n    - **Directive UE** : Non applicable (correction de forme).\n\n31. **Remplacer \'commerce ; 2e crédits0° Les gestionnaires d.\' par \'commerce.\'** :\n    - **Changement** : Correction typographique.\n    - **Directive UE** : Non applicable (correction de forme).\n\n32. **Remplacer \'20°\' par \'19°\'** :\n    - **Changement** : Réorganisation de la numérotation.\n    - **Directive UE** : Non applicable (réorganisation interne).\n\n33. **Remplacer \'morales.\' par \'morales\'** :\n    - **Changement** : Correction typographique.\n    - **Directive UE** : Non applicable (correction de forme).\n\nEn conclusion, la majorité des changements apportés au texte français sont des corrections typographiques, des mises à jour de références législatives internes, et des simplifications de la structure. Les modifications substantielles, telles que la suppression des mentions relatives aux prestataires de services sur crypto-actifs, sont alignées avec les dispositions de la directive européenne, notamment l\'article 2(1)(3)(a), qui ne mentionne pas spécifiquement ces prestataires.' additional_kwargs={'refusal': None} response_metadata={'token_usage': {'completion_tokens': 3064, 'prompt_tokens': 32042, 'total_tokens': 35106, 'completion_tokens_details': {'accepted_prediction_tokens': 0, 'audio_tokens': 0, 'reasoning_tokens': 0, 'rejected_prediction_tokens': 0}, 'prompt_tokens_details': {'audio_tokens': 0, 'cached_tokens': 0}}, 'model_name': 'gpt-4o-2024-05-13', 'system_fingerprint': 'fp_65792305e4', 'id': 'chatcmpl-BFOR239LTObyR0XjenG2iU2lIeOH8', 'prompt_filter_results': [{'prompt_index': 0, 'content_filter_results': {'hate': {'filtered': False, 'severity': 'safe'}, 'jailbreak': {'filtered': False, 'detected': False}, 'self_harm': {'filtered': False, 'severity': 'safe'}, 'sexual': {'filtered': False, 'severity': 'safe'}, 'violence': {'filtered': False, 'severity': 'safe'}}}], 'finish_reason': 'stop', 'logprobs': None, 'content_filter_results': {'hate': {'filtered': False, 'severity': 'safe'}, 'protected_material_code': {'filtered': False, 'detected': False}, 'protected_material_text': {'filtered': False, 'detected': False}, 'self_harm': {'filtered': False, 'severity': 'safe'}, 'sexual': {'filtered': False, 'severity': 'safe'}, 'violence': {'filtered': False, 'severity': 'safe'}}} id='run-f37c32be-5f6c-4ca3-a696-94e5b83b49fa-0' usage_metadata={'input_tokens': 32042, 'output_tokens': 3064, 'total_tokens': 35106, 'input_token_details': {'audio': 0, 'cache_read': 0}, 'output_token_details': {'audio': 0, 'reasoning': 0}}
+Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons examiner les modifications spécifiques apportées au texte français et les comparer avec les dispositions de la directive européenne. Voici une analyse détaillée des changements :
+
+1. **Remplacer 'paiement,' par 'paiement et'**
+   - **Changement** : Ajout de "et" après "paiement".
+   - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+2. **Supprimer 'et les prestataires de services sur crypto-actifs'**
+   - **Changement** : Suppression de la mention des prestataires de services sur crypto-actifs.
+   - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+3. **Supprimer 'ou d'une ou plusieurs personnes en vue de la fourniture de services sur cryptoactifs'**
+   - **Changement** : Suppression de la mention des personnes fournissant des services sur crypto-actifs.
+   - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+4. **Remplacer 'l'article' par 'l' article'**
+   - **Changement** : Correction typographique.
+   - **Directive UE** : Non applicable (correction de forme).
+
+5. **Remplacer '721-7' par '711-2'**
+   - **Changement** : Mise à jour de la référence législative.
+   - **Directive UE** : Non applicable (mise à jour de référence).
+
+6. **Remplacer '721-18 et L. 721-19' par '712-4'**
+   - **Changement** : Mise à jour de la référence législative.
+   - **Directive UE** : Non applicable (mise à jour de référence).
+
+7. **Remplacer '532-48' par '532-48,'**
+   - **Changement** : Ajout d'une virgule.
+   - **Directive UE** : Non applicable (correction de forme).
+
+8. **Remplacer '440-2,' par '440-2 ,'**
+   - **Changement** : Ajout d'un espace après la virgule.
+   - **Directive UE** : Non applicable (correction de forme).
+
+9. **Remplacer '421-2,' par '421-2 ,'**
+   - **Changement** : Ajout d'un espace après la virgule.
+   - **Directive UE** : Non applicable (correction de forme).
+
+10. **Supprimer 'mentionnés aux 1° et 2° du I de l'article L. 441-1'**
+    - **Changement** : Suppression de la mention des articles spécifiques.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+11. **Remplacer 'prestataires de services de financement participatif au titre de leurs activités mentionnées à l'article L. 547-4' par 'conseillers en investissements participatifs'**
+    - **Changement** : Modification de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+12. **Remplacer '211-4,' par '211-4 ,'**
+    - **Changement** : Ajout d'un espace après la virgule.
+    - **Directive UE** : Non applicable (correction de forme).
+
+13. **Remplacer 'l'article' par 'l' article'**
+    - **Changement** : Correction typographique.
+    - **Directive UE** : Non applicable (correction de forme).
+
+14. **Supprimer 'a)'**
+    - **Changement** : Suppression de la lettre "a)".
+    - **Directive UE** : Non applicable (correction de forme).
+
+15. **Remplacer 'à 4° de l'article L. 54-10-2, et ; b) Les prestataires des services autorisés à fournir des services sur crypto-actifs conformément à l'article 59 du règlement (UE) 2023/1114 du Parlement européen et du Conseil du 31 mai 2023 sur les marchés de crypto-actifs et modifiant les règlements (UE) n° 1093/2010 et (UE) n° 1095/2010 et les directives 2013/36/ UE et (UE) 2019/1937, y compris les succursales établies en France des prestataires' par 'et 2° de l'article L. 54-10-2 ; 7° ter Les émetteurs de jetons'**
+    - **Changement** : Modification de la terminologie et de la structure.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+16. **Remplacer 'leur siège social' par 'obtenu le visa mentionné à l'article L. 552-4'**
+    - **Changement** : Mise à jour de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+17. **Remplacer 'un autre Etat membre de l'Union européenne ou partie à l'Espace économique européen à l'exception de ceux mentionnés au b du' par 'le cadre de l'offre ayant fait l'objet du visa et dans la limite des transactions avec les souscripteurs prenant part à cette offre ;'**
+    - **Changement** : Mise à jour de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+18. **Supprimer 'du présent article ; 7° ter (Abrogé) ; 7° quater a)'**
+    - **Changement** : Suppression de la mention des articles abrogés.
+    - **Directive UE** : Non applicable (mise à jour de référence).
+
+19. **Supprimer 'a du'**
+    - **Changement** : Suppression de la mention des articles spécifiques.
+    - **Directive UE** : Non applicable (correction de forme).
+
+20. **Remplacer 'et b) Les conseillers en investissements financiers, dépositaires centraux et sociétés de gestion de placements collectifs mentionnées à l'article L. 543-1 autorisés à fournir des services sur crypto-actifs conformément à l'article 59 du règlement (UE) 2023/1114 du Parlement européen et du Conseil du 31 mai 2023 sur les marchés de crypto actifs et modifiant les règlements (UE) n° 1093/2010 et (UE) n° 1095/2010 et les directives 2013/36/ UE et (UE) 2019/1937, y compris les succursales établies en France des sociétés de gestion européennes d'OPCVM et de FIA' par '8° Les personnes exerçant les activités'**
+    - **Changement** : Modification de la terminologie et de la structure.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+21. **Remplacer 'articles L. 532-20-1 et L. 532-21-3 ayant leur siège social dans un autre Etat membre de l'Union européenne ou partie à l'Espace économique européen ou les prestataires de services autorisés' par '1°,'**
+    - **Changement** : Mise à jour de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+22. **Remplacer 'pour fournir les services de gestion de portefeuille de crypto-actifs ou de conseils en crypto-actifs mentionnés respectivement au i et au h du point 16 du paragraphe 1 de l'article 3 du même règlement ; 8° Les personnes exerçant les activités mentionnées au 1°, mais concernant' par 'en ce qui concerne'**
+    - **Changement** : Mise à jour de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+23. **Supprimer 'uniquement'**
+    - **Changement** : Suppression du mot "uniquement".
+    - **Directive UE** : Non applicable (correction de forme).
+
+24. **Supprimer 'ainsi qu'aux'**
+    - **Changement** : Suppression de la mention des articles spécifiques.
+    - **Directive UE** : Non applicable (correction de forme).
+
+25. **Remplacer '11°' par '12° Les experts-comptables, les salariés autorisés à exercer la profession d'expert-comptable en application des articles 83 ter et 83 quater de l'ordonnance n° 45-2138 du 19 septembre 1945 portant institution de l'ordre des experts-comptables et réglementant les titres et la profession d'expert-comptable ; 12°'**
+    - **Changement** : Mise à jour de la numérotation et ajout de la mention des experts-comptables.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+26. **Remplacer 'personnes, autres que celles mentionnées' par 'commissaires'**
+    - **Changement** : Mise à jour de la terminologie.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+27. **Remplacer '1° à 7° quater, se livrant à titre habituel et principal' par 'comptes ; 13° Les avocats'**
+    - **Changement** : Mise à jour de la numérotation et ajout de la mention des avocats.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+28. **Remplacer 'commerce de métaux précieux ou de pierres précieuses,' par 'Conseil d'Etat et à la Cour de cassation, les avocats, les notaires, les huissiers de justice, les administrateurs judiciaires, les mandataires judiciaires et les commissaires-priseurs judiciaires, dans les conditions prévues à l'article L. 561-3 ; 14° Les opérateurs de ventes volontaires de meubles aux enchères publiques'**
+    - **Changement** : Mise à jour de la terminologie et ajout de la mention des opérateurs de ventes volontaires.
+    - **Directive UE** : Article 2(1)(b) - "les établissements financiers".
+
+29. **Supprimer '12° Les experts-comptables, les salariés autorisés à exercer la profession d'expert-comptable en application des articles 83 ter et 83 quater de l'ordonnance n° 45-2138 du 19 septembre 1945 portant institution de l'ordre des experts-comptables et réglementant les titres et la profession d'expert-comptable ; 12° bis Les commissaires aux comptes ; 13° Les avocats au Conseil d'Etat et à la Cour de cassation, les avocats, les notaires, les commissaires de justice, les administrateurs judiciaires et les mandataires judiciaires, dans les conditions prévues à l'article L. 561-3 ; 14° Les opérateurs de ventes volontaires de meubles aux enchères publiques lorsque la valeur de la transaction ou d'une série de transactions liées est d'un montant égal ou supérieur à 10 000 euros ;'**
+    - **Changement** : Suppression de la mention des articles spécifiques.
+    - **Directive UE** : Non applicable (mise à jour de référence).
+
+30. **Remplacer 'l'article' par 'l' article'**
+    - **Changement** : Correction typographique.
+    - **Directive UE** : Non applicable (correction de forme).
+
+31. **Remplacer 'commerce ; 2e crédits0° Les gestionnaires d.' par 'commerce.'**
+    - **Changement** : Correction typographique.
+    - **Directive UE** : Non applicable (correction de forme).
+
+32. **Remplacer '20°' par '19°'**
+    - **Changement** : Mise à jour de la numérotation.
+    - **Directive UE** : Non applicable (correction de forme).
+
+33. **Remplacer 'morales.' par 'morales'**
+    - **Changement** : Suppression du point final.
+    - **Directive UE** : Non applicable (correction de forme).
+
+En conclusion, la majorité des changements apportés au texte français sont des corrections de forme, des mises à jour de références législatives, et des modifications de terminologie. Les articles de la directive européenne qui sont principalement à l'origine de ces changements sont les articles 2(1)(b) et 2(1)(d), qui définissent les entités assujetties aux obligations de vigilance à l'égard de la clientèle.

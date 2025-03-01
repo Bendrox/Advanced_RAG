@@ -12,8 +12,11 @@ from data_pipelines.txt_saver_loader import load_txt, save_txt
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
+
+#importing RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import input_data_chromasdb, qa_vectordb
+from rag_modules.chromasdb import input_data_chromasdb
+from rag_modules.qa import qa_vectordb, qa_llm_vectordb_chroma
 
 # Global import 
 import os 
@@ -106,7 +109,7 @@ print("Fin de l'étape 6.3: Question test")
 
 # QA retreival test:
 print("Début de l'étape 6.4: QA with llm test")
-
+qa_llm_vectordb_chroma()
 
 print("Fin de l'étape 6.4: QA with llm test")
 

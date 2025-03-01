@@ -21,7 +21,7 @@ def input_data_chromasdb(namedb, chunks,nom_source, embedding_model, chemin):
         persist_directory=chemin,
         embedding=embedding_model)
 
-def qa_chroma(namedb,question, k_numer ,source_filter):
+def qa_vectordb(namedb, question, k_numer ,source_filter):
     """
     Effectue une recherche de similarité dans une base vectorielle Chroma, 
     filtrée par source, et retourne les documents les plus proches de la question.
@@ -38,3 +38,4 @@ def qa_chroma(namedb,question, k_numer ,source_filter):
     docs = namedb.similarity_search(question,k_numer, filter={"source":source_filter})
     
         
+

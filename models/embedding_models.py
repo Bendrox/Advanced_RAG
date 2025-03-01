@@ -11,7 +11,7 @@ emb_3_large = AzureOpenAIEmbeddings(
     chunk_size=1000
 )
 
-def funct_embedding(input):
+def funct_embedding_openai_3l(input):
     """
     embedding d'un texte en utilisant le modèle `text-embedding-3-large`.
 

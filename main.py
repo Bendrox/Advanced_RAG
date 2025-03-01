@@ -12,7 +12,7 @@ from data_pipelines.txt_saver_loader import load_txt, save_txt
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
-from models.embedding_models import emb_3_large, funct_embedding
+from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import input_data_chromasdb, qa_chroma
 
 # Global import 
@@ -84,13 +84,17 @@ chunks = chunker_optimal(scrape_result_5)
 print("Fin de l'étape 6.1: chunking")
 
 # list to dict 
+print("Début de l'étape 6.2: list to dict")
 chunks_dic=chunks_list_to_dict(chunks)
+print("Fin de l'étape 6.2: list to dict")
+
 # output:
 # {'Article 69': 'Les États membres sont destinataires de la présente directive...'}
 
-# embedding 
-funct_embedding()
-
-
+# embedding + stockage chromasdb
+# funct_embedding_openai_3l()
+print("Début de l'étape 6.3: chunks to vector database")
+input_data_chromasdb("vector_chromasdb",chunks_dic, "aml_5", emb_3_large, "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
+print("Fin de l'étape 6.3: chunks to vector database")
 
 ###### Step 7:

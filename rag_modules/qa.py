@@ -19,6 +19,7 @@ def qa_vector_chromasdb(vector_chromasdb, question, k_numer ,source_filter):
         List[Document]: Liste des documents les plus similaires trouvés.
     """
     docs = vector_chromasdb.similarity_search(question,k_numer, filter={"source":source_filter})
+    return docs
 
 
 

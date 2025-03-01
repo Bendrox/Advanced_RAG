@@ -129,7 +129,7 @@ print("---------------------------------------")
 # QA retreival + llm test:
 print("Début de l'étape 6.4: QA with llm test")
 res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,4)
-print(res_rag_1)
+print(res_rag_1['answer'])
 res_rag_1_str = str(res_rag_1)
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
 print("Fin de l'étape 6.4: QA with llm test")

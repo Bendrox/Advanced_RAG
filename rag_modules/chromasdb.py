@@ -1,6 +1,6 @@
 from langchain.vectorstores import Chroma
 
-def input_data_chromasdb(namedb, chunks,nom_source, embedding_model, chemin):
+def input_data_chromasdb(chunks,nom_source, embedding_model, chemin):
     """
     Crée une base de données vectorielle Chroma à partir de textes segmentés, 
     en les encodant avec un modèle d'embedding, et en les stockant avec persistance.
@@ -15,27 +15,12 @@ def input_data_chromasdb(namedb, chunks,nom_source, embedding_model, chemin):
     Returns:
         Chroma: Instance de la base de données Chroma créée avec les textes indexés.
     """
-    namedb = Chroma.from_texts( 
+    chroma_db = Chroma.from_texts( 
         texts=chunks,
         metadatas= [{"source": nom_source} for _ in chunks],
         persist_directory=chemin,
         embedding=embedding_model)
+    return chroma_db
 
-def qa_vectordb(namedb, question, k_numer ,source_filter):
-    """
-    Effectue une recherche de similarité dans une base vectorielle Chroma, 
-    filtrée par source, et retourne les documents les plus proches de la question.
-
-    Args:
-        namedb (Chroma): Instance d'une base vectorielle Chroma initialisée.
-        question (str): Question posée à laquelle on cherche des passages similaires.
-        k_numer (int): Nombre de documents similaires à retourner.
-        source_filter (str): Valeur de filtre sur la métadonnée "source" pour restreindre la recherche.
-
-    Returns:
-        List[Document]: Liste des documents les plus similaires trouvés.
-    """
-    docs = namedb.similarity_search(question,k_numer, filter={"source":source_filter})
-    
         
 

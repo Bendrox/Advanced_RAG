@@ -28,7 +28,6 @@ def get_eu_data_3p(llm_model, reglement_ue, fr_old_version, fr_new_version):
 
 def get_eu_data_4p(llm_model, reglement_ue, fr_old_version, fr_new_version):
     changement_derter= comparer_phrases(fr_old_version, fr_new_version)
-    print(changement_derter)
     prompt_LCQA_4p = f""" 
             Tu es un juriste expert avec au moins 10 ans d expérience.
             Tu as une double expertise a la fois dans la réglementation francaise et dans les textes européens.

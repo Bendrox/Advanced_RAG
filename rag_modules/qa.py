@@ -4,7 +4,7 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.prompts import ChatPromptTemplate
 
-def qa_vectordb(namedb, question, k_numer ,source_filter):
+def qa_vector_chromasdb(vector_chromasdb, question, k_numer ,source_filter):
     """
     Effectue une recherche de similarité dans une base vectorielle Chroma, 
     filtrée par source, et retourne les documents les plus proches de la question.
@@ -18,9 +18,10 @@ def qa_vectordb(namedb, question, k_numer ,source_filter):
     Returns:
         List[Document]: Liste des documents les plus similaires trouvés.
     """
-    docs = namedb.similarity_search(question,k_numer, filter={"source":source_filter})
-    
-    
+    docs = vector_chromasdb.similarity_search(question,k_numer, filter={"source":source_filter})
+
+
+
 def qa_llm_vectordb_chroma(vectordb_name,question,k):
     """
     Exécute une requête question/réponse en utilisant :

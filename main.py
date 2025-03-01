@@ -15,15 +15,16 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 
 #importing RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import input_data_chromasdb
+from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
 from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb
 
 # Global import 
 import os 
 
 # langchain 
-from langchain.vectorstores import Chroma
-
+#from langchain.vectorstores import Chroma
+from langchain_chroma import Chroma
+## Input variables: 
 
 ###### Step 1: inject URL for Firecrawl
 print("---------------------------------------")
@@ -106,13 +107,22 @@ print("---------------------------------------")
 # embedding + stockage chromasdb
 # funct_embedding_openai_3l()
 print("Début de l'étape 6.3: chunks to vector database")
-vector_chromasdb = input_data_chromasdb(chunks_dic,
-                                        "aml_5", 
-                                        emb_3_large, 
-                                        "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
+source_name = "aml_5"
 
+if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
+    print('Données existentes dans ChromasDB') 
+    global vector_chromasdb
+    vector_chromasdb = load_existing_chromasdb(chroma_db_path, emb_3_large)
+
+else:
+    print('Données non existentes dans ChromasDB, chargement en cours...') 
+    vector_chromasdb = input_data_chromasdb(chunks_dic, source_name, emb_3_large, 
+                                                    "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
+    print(vector_chromasdb._collection.count())        
+    
 print("Fin de l'étape 6.3: chunks to vector database, ")
-print(vector_chromasdb._collection.count())
+
 print("---------------------------------------")
 
 # QA retreival test:
@@ -130,7 +140,7 @@ print("---------------------------------------")
 print("Début de l'étape 6.4: QA with llm test")
 res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,4)
 print(res_rag_1['answer'])
-res_rag_1_str = str(res_rag_1)
+res_rag_1_str = str(res_rag_1['answer'])
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
 print("Fin de l'étape 6.4: QA with llm test")
 print("---------------------------------------")

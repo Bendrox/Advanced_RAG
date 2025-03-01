@@ -1,28 +1,7 @@
-from langchain.vectorstores import Chroma
-
-def input_data_chromasdb(chunks,nom_source, embedding_model, chemin):
-    """
-    Crée une base de données vectorielle Chroma à partir de textes segmentés, 
-    en les encodant avec un modèle d'embedding, et en les stockant avec persistance.
-
-    Args:
-        namedb (str): Nom de la base de données vectorielle (pas utilisé dans cette fonction, mais peut être utile pour gestion externe).
-        chunks (List[str]): Liste de morceaux de texte (documents découpés) à indexer.
-        nom_source (str): Nom de la source associée à chaque chunk (utilisé pour les métadonnées).
-        embedding_model (Embeddings): Modèle d'embedding compatible LangChain pour encoder les textes.
-        chemin (str): Chemin du dossier où persister la base Chroma (persist_directory).
-
-    Returns:
-        Chroma: Instance de la base de données Chroma créée avec les textes indexés.
-    """
-    chroma_db = Chroma.from_texts( 
-        texts=chunks,
-        metadatas= [{"source": nom_source} for _ in chunks],
-        persist_directory=chemin,
-        embedding=embedding_model)
-    return chroma_db
-
-
+from langchain_chroma import Chroma
+import os
+from chromadb import PersistentClient
+from chromadb.config import Settings
 
 
 def input_data_chromasdb(chunks_dict, nom_source, embedding_model, chemin):
@@ -36,5 +15,34 @@ def input_data_chromasdb(chunks_dict, nom_source, embedding_model, chemin):
         metadatas=metadatas,
         persist_directory=chemin,
         embedding=embedding_model
+    )
+    return chroma_db
+
+
+def source_exists_in_chroma(chemin, source_name, embedding_model) -> bool:
+    """
+    Vérifie si une source donnée existe déjà dans la base Chroma persistée.
+    Args:
+        chemin (str): Dossier de persistance de Chroma.
+        source_name (str): Nom de la source à chercher dans les métadonnées.
+        embedding_model: Modèle d'embedding utilisé pour initier Chroma.
+
+    Returns: True si la source est déjà indexée, False sinon.
+    """
+    
+    # Charge la base Chroma existante
+    chroma_db = Chroma(
+        persist_directory=chemin,
+        embedding_function=embedding_model)
+
+    retriever = chroma_db.as_retriever()
+    docs = retriever.invoke("test", filter={"source": source_name})
+
+    return len(docs) > 0
+
+def load_existing_chromasdb(db_path, embedding_model):
+    chroma_db = Chroma(
+        persist_directory=db_path,
+        embedding_function=embedding_model
     )
     return chroma_db

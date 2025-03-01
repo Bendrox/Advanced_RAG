@@ -1,33 +1,30 @@
-Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les versions avant et après l'entrée en vigueur de la directive européenne. Voici les principaux changements et les articles de la directive européenne qui les ont inspirés :
+Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les deux versions du texte de loi français et identifier les modifications. Ensuite, nous devons trouver les articles de la directive européenne qui correspondent à ces modifications.
 
-1. **Ajout des prestataires de services sur crypto-actifs** :
-   - **Avant** : Les prestataires de services sur crypto-actifs étaient mentionnés de manière spécifique et détaillée.
-   - **Après** : Les prestataires de services sur crypto-actifs sont mentionnés de manière plus générale, avec des références spécifiques aux articles du règlement européen sur les marchés de crypto-actifs.
-   - **Directive européenne** : Article 2(1)(3)(a) et (b) de la directive européenne, qui inclut les prestataires de services sur crypto-actifs dans les entités assujetties.
+### Changements Identifiés
 
-2. **Modification des références aux établissements de crédit, de paiement et de monnaie électronique** :
-   - **Avant** : Les établissements de crédit, de paiement et de monnaie électronique étaient mentionnés avec des références spécifiques aux articles du code monétaire et financier.
-   - **Après** : Les références sont simplifiées et harmonisées.
-   - **Directive européenne** : Article 2(1)(1)(a) et (b) de la directive européenne, qui inclut les établissements de crédit et financiers dans les entités assujetties.
+1. **Suppression des prestataires de services sur crypto-actifs**:
+   - Avant modification: Les prestataires de services sur crypto-actifs étaient mentionnés dans plusieurs points (1° quater, 7° bis a), 7° quater b)).
+   - Après modification: Les mentions spécifiques aux prestataires de services sur crypto-actifs ont été supprimées.
 
-3. **Ajout des émetteurs de jetons** :
-   - **Avant** : Les émetteurs de jetons n'étaient pas spécifiquement mentionnés.
-   - **Après** : Les émetteurs de jetons ayant obtenu un visa sont inclus.
-   - **Directive européenne** : Article 2(1)(3)(a) et (b) de la directive européenne, qui inclut les émetteurs de jetons dans les entités assujetties.
+2. **Modification des articles de référence pour les institutions d'émission**:
+   - Avant modification: Références à l'article L. 721-7 et L. 721-18 et L. 721-19.
+   - Après modification: Références à l'article L. 711-2 et L. 712-4.
 
-4. **Modification des références aux opérateurs de jeux et de paris** :
-   - **Avant** : Les opérateurs de jeux et de paris étaient mentionnés avec des références spécifiques aux articles du code de la sécurité intérieure et d'autres lois.
-   - **Après** : Les références sont simplifiées et harmonisées.
-   - **Directive européenne** : Article 2(1)(1)(i) de la directive européenne, qui inclut les prestataires de services de jeux d'argent et de hasard dans les entités assujetties.
+3. **Modification des professions juridiques**:
+   - Avant modification: Les professions juridiques incluaient les commissaires de justice.
+   - Après modification: Les professions juridiques incluent les huissiers de justice et les commissaires-priseurs judiciaires.
 
-5. **Suppression des références aux prestataires de services de financement participatif** :
-   - **Avant** : Les prestataires de services de financement participatif étaient spécifiquement mentionnés.
-   - **Après** : Les références spécifiques sont supprimées.
-   - **Directive européenne** : Article 2(1)(1)(a) et (b) de la directive européenne, qui inclut les prestataires de services financiers dans les entités assujetties.
+### Correspondance avec la Directive Européenne
 
-6. **Modification des références aux intermédiaires en opérations de banque et en services de paiement** :
-   - **Avant** : Les intermédiaires en opérations de banque et en services de paiement étaient mentionnés avec des références spécifiques aux articles du code monétaire et financier.
-   - **Après** : Les références sont simplifiées et harmonisées.
-   - **Directive européenne** : Article 2(1)(1)(a) et (b) de la directive européenne, qui inclut les intermédiaires financiers dans les entités assujetties.
+1. **Suppression des prestataires de services sur crypto-actifs**:
+   - **Directive Européenne**: Article 2, paragraphe 1, point 3) a) à d) et f) mentionne les entités assujetties, mais ne fait pas de mention spécifique aux prestataires de services sur crypto-actifs. La suppression dans la loi française pourrait être une alignement avec la directive qui ne les mentionne pas explicitement.
 
-En conclusion, les changements dans la loi française sont principalement inspirés par les articles 2(1)(1)(a), 2(1)(1)(b), 2(1)(1)(i), et 2(1)(3)(a) et (b) de la directive européenne, qui définissent les entités assujetties aux obligations de lutte contre le blanchiment de capitaux et le financement du terrorisme. Ces articles ont conduit à une harmonisation et une simplification des références dans la loi française, ainsi qu'à l'inclusion de nouvelles catégories d'entités, telles que les prestataires de services sur crypto-actifs et les émetteurs de jetons.
+2. **Modification des articles de référence pour les institutions d'émission**:
+   - **Directive Européenne**: Article 3, définitions, notamment les points concernant les établissements de crédit et les établissements financiers. La modification des articles de référence pourrait être une mise à jour pour aligner avec les définitions et les exigences de la directive.
+
+3. **Modification des professions juridiques**:
+   - **Directive Européenne**: Article 2, paragraphe 1, point 3) a) et b) mentionne les notaires et autres membres de professions juridiques indépendantes. L'ajout des huissiers de justice et des commissaires-priseurs judiciaires dans la loi française pourrait être une réponse à l'article 2 de la directive qui inclut les professions juridiques indépendantes.
+
+### Conclusion
+
+Les modifications apportées à la loi française semblent être motivées par les articles de la directive européenne qui définissent les entités assujetties et les professions juridiques indépendantes. Les changements visent à aligner la loi française avec les exigences et les définitions de la directive européenne, notamment les articles 2 et 3 de la directive.

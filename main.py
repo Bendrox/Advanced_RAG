@@ -9,12 +9,18 @@ from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_d
 from data_pipelines.txt_saver_loader import load_txt, save_txt
 
 ## importing LLM
-from llm_tools.chunker import chunker_optimal
+from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
-from models.llm_models import llm_4o, llm_4omini, llm_stream_response
+from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
+from models.embedding_models import emb_3_large, funct_embedding
+from rag_modules.chromasdb import input_data_chromasdb, qa_chroma
 
 # Global import 
 import os 
+
+# langchain 
+from langchain.vectorstores import Chroma
+
 
 ###### Step 1: inject URL for Firecrawl
 print("Début de l'étape 1: injection des liens")
@@ -76,5 +82,15 @@ print("Début de l'étape 6: RAG building")
 print("Début de l'étape 6.1: chunking")
 chunks = chunker_optimal(scrape_result_5)
 print("Fin de l'étape 6.1: chunking")
+
+# list to dict 
+chunks_dic=chunks_list_to_dict(chunks)
+# output:
+# {'Article 69': 'Les États membres sont destinataires de la présente directive...'}
+
+# embedding 
+funct_embedding()
+
+
 
 ###### Step 7:

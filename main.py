@@ -13,7 +13,7 @@ from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import input_data_chromasdb, qa_chroma
+from rag_modules.chromasdb import input_data_chromasdb, qa_vectordb
 
 # Global import 
 import os 
@@ -96,5 +96,18 @@ print("Fin de l'étape 6.2: list to dict")
 print("Début de l'étape 6.3: chunks to vector database")
 input_data_chromasdb("vector_chromasdb",chunks_dic, "aml_5", emb_3_large, "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
 print("Fin de l'étape 6.3: chunks to vector database")
+print(vector_chromasdb._collection.count()) #same as nbr of chunks  we have
+
+# QA retreival test:
+print("Début de l'étape 6.3: Question test")
+question="Est est l'objectif de la directive ?"
+qa_vectordb("vector_chromasdb",question , 4, "aml_5")
+print("Fin de l'étape 6.3: Question test")
+
+# QA retreival test:
+print("Début de l'étape 6.4: QA with llm test")
+
+
+print("Fin de l'étape 6.4: QA with llm test")
 
 ###### Step 7:

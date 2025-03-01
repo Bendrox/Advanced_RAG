@@ -6,7 +6,7 @@ from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_d
                                           nettoyer_markdown, weird_carac_remove, 
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
-from data_pipelines.txt_saver_loader import load_txt, save_txt
+from data_pipelines.txt_saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
@@ -96,6 +96,7 @@ print("---------------------------------------")
 # list to dict 
 print("Début de l'étape 6.2: list to dict")
 chunks_dic=chunks_list_to_dict(chunks)
+save_dict_json("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output_chunks/chunks.json", chunks_dic)
 print("Fin de l'étape 6.2: list to dict")
 print("---------------------------------------")
 
@@ -118,8 +119,10 @@ print("---------------------------------------")
 print("Début de l'étape 6.3: Question test")
 
 question="Est est l'objectif de la directive ?"
-qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
-
+res_qa_retreival= qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
+print(res_qa_retreival)
+res_qa_retreival_str=str(res_qa_retreival)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",res_qa_retreival_str)
 print("Fin de l'étape 6.3: Question test")
 print("---------------------------------------")
 
@@ -127,7 +130,8 @@ print("---------------------------------------")
 print("Début de l'étape 6.4: QA with llm test")
 res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,4)
 print(res_rag_1)
-print(res_rag_1)
+res_rag_1_str = str(res_rag_1)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
 print("Fin de l'étape 6.4: QA with llm test")
 print("---------------------------------------")
 

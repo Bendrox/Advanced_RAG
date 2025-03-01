@@ -1,11 +1,10 @@
 
+import json 
 
 def load_txt(filepath: str):
     """
     Charge un fichier txt dans une variable str
-
     Args: filepath (str)
-
     Returns: str
     
     """
@@ -24,6 +23,10 @@ def save_txt(filepath: str, text: str):
     with open(filepath, "w", encoding="utf-8") as fichier:
         fichier.write(text)
 
-# Utilisation :
-save_txt("resultat_extraction.txt", "Ceci est mon texte extrait et nettoyé.")
-
+def save_dict_json(filepath: str, dict: dict):
+    with open(filepath, "w", encoding="utf-8") as fichier:
+        json.dump( #écrit le dictionnaire dans un fichier
+                dict, 
+                fichier, 
+                ensure_ascii=False,# garde les accents/caractères spéciaux lisibles
+                indent=4) # rend le fichier lisible avec une bonne indentation

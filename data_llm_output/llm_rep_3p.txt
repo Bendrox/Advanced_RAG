@@ -1,38 +1,37 @@
-Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les versions avant et après l'entrée en vigueur de la directive européenne. Voici une analyse détaillée des modifications et des articles de la directive européenne correspondants :
+Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les deux versions de la loi française et identifier les modifications spécifiques. Ensuite, nous devons relier ces modifications aux articles pertinents de la directive européenne.
 
-1. **Ajout des prestataires de services sur crypto-actifs :**
-   - **Avant :** Les prestataires de services sur crypto-actifs étaient mentionnés spécifiquement dans plusieurs alinéas (1° quater, 7° bis a), 7° quater b)).
-   - **Après :** Les mentions spécifiques aux prestataires de services sur crypto-actifs ont été supprimées.
-   - **Directive européenne correspondante :** Article 2(1)(3)(g) de la directive européenne, qui inclut les prestataires de services de jeux d'argent et de hasard, pourrait être interprété comme une base pour inclure les prestataires de services sur crypto-actifs dans la législation nationale.
+### Changements Identifiés dans la Loi Française
 
-2. **Modification des références aux articles du code des assurances et du code de la sécurité sociale :**
-   - **Avant :** Références spécifiques aux articles L. 310-1 et L. 310-2 du code des assurances, et aux articles L. 942-1 du code de la sécurité sociale.
-   - **Après :** Les références sont maintenues mais les articles sont réorganisés.
-   - **Directive européenne correspondante :** Article 2(1)(3)(a) et (b) de la directive européenne, qui inclut les établissements de crédit et les établissements financiers.
+1. **Suppression des références aux prestataires de services sur crypto-actifs** :
+   - Avant : Les prestataires de services sur crypto-actifs étaient mentionnés dans plusieurs points (1° quater, 7° bis a, 7° quater b).
+   - Après : Les références spécifiques aux prestataires de services sur crypto-actifs ont été supprimées.
 
-3. **Suppression des mentions spécifiques aux succursales des établissements de crédit et des établissements financiers :**
-   - **Avant :** Les succursales des établissements de crédit et des établissements financiers étaient spécifiquement mentionnées.
-   - **Après :** Les mentions spécifiques aux succursales ont été supprimées.
-   - **Directive européenne correspondante :** Article 2(1)(1) et (2) de la directive européenne, qui inclut les établissements de crédit et les établissements financiers, sans distinction explicite entre les succursales et les établissements principaux.
+2. **Modification des références aux institutions d'émission** :
+   - Avant : Références à l'institut d'émission des départements d'outre-mer et à l'institut d'émission d'outre-mer.
+   - Après : Références modifiées pour inclure les articles L. 711-2 et L. 712-4 du code monétaire et financier.
 
-4. **Ajout des intermédiaires en financement participatif :**
-   - **Avant :** Les intermédiaires en financement participatif étaient mentionnés.
-   - **Après :** Les intermédiaires en financement participatif sont toujours mentionnés.
-   - **Directive européenne correspondante :** Article 2(1)(3)(a) de la directive européenne, qui inclut les auditeurs, experts-comptables externes et conseillers fiscaux, pourrait être interprété comme une base pour inclure les intermédiaires en financement participatif.
+3. **Ajout de nouvelles catégories de personnes assujetties** :
+   - Avant : Les catégories incluaient les intermédiaires en financement participatif, les changeurs manuels, etc.
+   - Après : Ajout des émetteurs de jetons ayant obtenu un visa (7° ter).
 
-5. **Modification des références aux articles du code monétaire et financier :**
-   - **Avant :** Références spécifiques aux articles L. 511-22, L. 511-23, L. 522-13, L. 526-24, etc.
-   - **Après :** Les références sont maintenues mais les articles sont réorganisés.
-   - **Directive européenne correspondante :** Article 2(1)(1) et (2) de la directive européenne, qui inclut les établissements de crédit et les établissements financiers.
+4. **Modification des seuils et conditions pour certaines transactions** :
+   - Avant : Références spécifiques aux transactions en espèces et à la monnaie électronique.
+   - Après : Maintien des seuils mais avec des modifications mineures dans la formulation.
 
-6. **Ajout des personnes exerçant l'activité de domiciliation :**
-   - **Avant :** Les personnes exerçant l'activité de domiciliation étaient mentionnées.
-   - **Après :** Les personnes exerçant l'activité de domiciliation sont toujours mentionnées.
-   - **Directive européenne correspondante :** Article 2(1)(3)(a) de la directive européenne, qui inclut les auditeurs, experts-comptables externes et conseillers fiscaux, pourrait être interprété comme une base pour inclure les personnes exerçant l'activité de domiciliation.
+### Correspondance avec la Directive Européenne
 
-7. **Ajout des personnes exerçant l'activité d'agents sportifs :**
-   - **Avant :** Les personnes exerçant l'activité d'agents sportifs étaient mentionnées.
-   - **Après :** Les personnes exerçant l'activité d'agents sportifs sont toujours mentionnées.
-   - **Directive européenne correspondante :** Article 2(1)(3)(a) de la directive européenne, qui inclut les auditeurs, experts-comptables externes et conseillers fiscaux, pourrait être interprété comme une base pour inclure les personnes exerçant l'activité d'agents sportifs.
+1. **Suppression des références aux prestataires de services sur crypto-actifs** :
+   - **Directive Européenne** : Article 2, paragraphe 1, point 3) a) à d) et f) - La directive mentionne les entités assujetties, y compris les prestataires de services financiers et les autres entités similaires. La suppression des références spécifiques aux prestataires de services sur crypto-actifs dans la loi française pourrait être une harmonisation avec la directive qui ne les mentionne pas explicitement.
 
-En conclusion, les modifications apportées à la loi française semblent être en grande partie alignées avec les exigences de la directive européenne, notamment en ce qui concerne l'inclusion de diverses entités et professions dans le champ d'application des obligations de lutte contre le blanchiment de capitaux et le financement du terrorisme. Les articles de la directive européenne qui ont probablement influencé ces changements sont principalement les articles 2(1)(1), 2(1)(2), et 2(1)(3).
+2. **Modification des références aux institutions d'émission** :
+   - **Directive Européenne** : Article 3 - Définitions des établissements financiers et des établissements de crédit. La modification des références dans la loi française pour inclure des articles spécifiques du code monétaire et financier pourrait être une clarification pour aligner avec les définitions de la directive.
+
+3. **Ajout de nouvelles catégories de personnes assujetties** :
+   - **Directive Européenne** : Article 2, paragraphe 1 - La directive énumère les entités assujetties, y compris les nouvelles catégories ajoutées dans la loi française comme les émetteurs de jetons. Cela montre une transposition directe des exigences de la directive.
+
+4. **Modification des seuils et conditions pour certaines transactions** :
+   - **Directive Européenne** : Article 11 - La directive fixe des seuils pour les transactions en espèces et en monnaie électronique. Les modifications mineures dans la loi française pour ces transactions sont en ligne avec les exigences de la directive.
+
+### Conclusion
+
+Les changements dans la loi française sont principalement motivés par la nécessité de se conformer aux exigences de la directive européenne. Les articles de la directive européenne qui ont influencé ces changements incluent principalement les articles 2, 3, et 11. Ces articles définissent les entités assujetties, les seuils pour les transactions, et les obligations de vigilance à l'égard de la clientèle, ce qui correspond aux modifications observées dans la loi française.

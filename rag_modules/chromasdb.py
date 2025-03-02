@@ -36,7 +36,7 @@ def source_exists_in_chroma(chemin, source_name, embedding_model) -> bool:
         embedding_function=embedding_model)
 
     retriever = chroma_db.as_retriever()
-    docs = retriever.invoke("test", filter={"source": source_name})
+    docs = retriever.invoke("tsst", filter={"source": source_name})
 
     return len(docs) > 0
 

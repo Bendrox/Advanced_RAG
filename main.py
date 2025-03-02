@@ -24,7 +24,10 @@ import os
 # langchain 
 #from langchain.vectorstores import Chroma
 from langchain_chroma import Chroma
+
 ## Input variables: 
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
+source_name = "aml_5"
 
 ###### Step 1: inject URL for Firecrawl
 print("---------------------------------------")
@@ -107,8 +110,6 @@ print("---------------------------------------")
 # embedding + stockage chromasdb
 # funct_embedding_openai_3l()
 print("Début de l'étape 6.3: chunks to vector database")
-chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
-source_name = "aml_5"
 
 if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
     print('Données existentes dans ChromasDB') 
@@ -122,7 +123,6 @@ else:
     print(vector_chromasdb._collection.count())        
     
 print("Fin de l'étape 6.3: chunks to vector database, ")
-
 print("---------------------------------------")
 
 # QA retreival test:

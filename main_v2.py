@@ -1,5 +1,5 @@
 # Importing data pipelines
-from data_pipelines.url_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
+from data_pipelines.url_extractor import pipe_1_url_to_pdf
 from data_pipelines.token_counter import count_tokens
 from data_pipelines.txt_saver_loader import load_txt
 from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
@@ -21,18 +21,21 @@ from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb
 # Global import 
 import os 
 
-# langchain 
+# Langchain 
 from langchain_chroma import Chroma
 
-## Input variables: 
+
+###### Step 1: inject data
+print("---------------------------------------")
+print("Début de l'étape 1: injection des données")
+
+
 chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
 source_name = "aml_5"
-
-###### Step 1: inject URL for Firecrawl
-print("---------------------------------------")
-print("Début de l'étape 1: injection des liens")
 url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
 url_crr="http://publications.europa.eu/resource/celex/32013R0575"
+
+
 print("Etape 1 terminée")
 print("---------------------------------------")
 

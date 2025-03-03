@@ -29,11 +29,30 @@ def firecrawl_extractor_mrkd(url:str):
     )
     scrape_result = scrape_result['markdown']
     return scrape_result
+        
+def pipe_1_url_to_pdf(url, save_path):
+    """Optimized pipeline Transform local URL eurlex to a local file PDF
 
+    Args:
+        url (_type_): url of eurlex , exemple: http://publications.europa.eu/resource/celex/32013R0575
+        save_path (_type_): give your local path
+    """
+    response = requests.get(url, 
+                            headers={"Accept": "application/pdf"})
+    # tres important pour ne pas renvoyer rdf ou autre format...
+    with open(save_path, "wb") as f:
+        f.write(response.content)
+        
+        
+#### Unused old functions : 
     
-
 def url_to_local_pdf(eurlex_url, save_path):
-    "Transform local URL to save a local file PDF"
+    """pipeline Transform local URL eurlex to a local file PDF
+
+    Args:
+        eurlex_url (_type_): url of eurlex , exemple: http://publications.europa.eu/resource/celex/32013R0575
+        save_path (_type_): give your local path
+    """
     response = requests.get(eurlex_url)
     with open(save_path, "wb") as f:
         f.write(response.content)

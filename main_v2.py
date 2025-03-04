@@ -30,6 +30,8 @@ chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/ch
 source_name = "aml_5" # "aml_5"
 url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
 url_crr="http://publications.europa.eu/resource/celex/32013R0575"
+lcqa="Oui"  # "Oui" "Non"
+url_ue=url_aml5 # ici choix aml5
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -41,12 +43,13 @@ print("Début de l'étape 2: récupération des données depuis Eurlex , sauvgar
 if not os.path.exists(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf"): 
     print("Etape 2: Fichier n'existe pas , récupération en cours")
 
-    pipe_1_url_to_pdf(url_aml5,f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
-    print("Etape 2: Fichier sauvgardé localement avec succès")
+    pipe_1_url_to_pdf(url_ue,f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
+    print("Etape 2: Fichier sauvegardé localement avec succès")
+    scrape_result=pipe_2_pdf_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
 
 else:
-    print("Etape 2: fichier existe, récupération a partir du fichier local")
-    scrape_result= pipe_1_url_to_pdf("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf")
+    print("Etape 2: fichier existe dans répertoire local")
+    scrape_result=pipe_2_pdf_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
     
 print("Etape 2 terminée: données européennes en local.")
 print("---------------------------------------")
@@ -75,12 +78,16 @@ art_1_old = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/
 art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_new.txt")
 
 # Inject data for QA 
-lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
-lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
 
-# save llm response 
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
+if lcqa == "Oui": 
+    lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
+    lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
+    # save llm response 
+    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
+    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
+
+
+else: print("Choix de l'utilisateur de ne pas faire du Long context Question answering.")
 
 print("Fin de l'étape 5: Long context Question answering")
 print("---------------------------------------")

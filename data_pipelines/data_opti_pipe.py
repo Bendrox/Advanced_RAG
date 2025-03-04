@@ -17,7 +17,7 @@ def pipe_1_url_to_pdf(url :str, save_path: str):
         f.write(response.content)
         
 # step 2: local pdf -> txt
-def pipe_2_pdf_txt(pdf_path):
+def pipe_2_pdf_txt(pdf_path) -> str:
     doc = fitz.open(pdf_path)
     text = ""
     for page in doc:
@@ -25,7 +25,7 @@ def pipe_2_pdf_txt(pdf_path):
     return text.strip() 
 
 # step 3: txt -> clean txt
-def pipe_3_nettoyer_texte(texte):
+def pipe_3_nettoyer_texte(texte) -> str:
     # 1. Supprime les caractères de coupure de mot suivis de retour à la ligne
     texte = re.sub(r'\xad\n', '', texte)
 

@@ -32,7 +32,7 @@ url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:320
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
 
 lcqa="Non"  # "Oui" "Non"
-url_ue=url_aml_5_pdf # ici choix aml5
+url_ue= url_aml_5_pdf # ici choix aml5
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -136,7 +136,12 @@ print("Début de l'étape 6.3: Question test")
 
 question="Est est l'objectif de la directive ?"
 res_qa_retreival= qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
-print(res_qa_retreival)
+
+print("Résultats de l'étape 6.3:")
+print(question)
+for res in res_qa_retreival:
+    print(f"* {res.page_content} [{res.metadata}]")
+    
 res_qa_retreival_str=str(res_qa_retreival)
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",res_qa_retreival_str)
 print("Fin de l'étape 6.3: Question test")

@@ -1,4 +1,8 @@
 
+import re
+
+## pipelines for firecrawl:
+
 def supr_avant_directive_mrk(texte):
     start_phrase = "ONT ADOPTÉ LA PRÉSENTE DIRECTIVE:\n\nCHAPITRE I"
     index_debut = texte.find(start_phrase)
@@ -16,7 +20,6 @@ def supr_apres_directive_mrk(texte):
     else:
         return texte  
 
-import re
 
 def nettoyer_markdown(texte):
     # Supprimer les tableaux Markdown

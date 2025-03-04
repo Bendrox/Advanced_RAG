@@ -3,7 +3,27 @@ import os
 from chromadb import PersistentClient
 from chromadb.config import Settings
 
-
+def source_exists_in_chroma(chemin, source_name, embedding_model):
+     """
+     Vérifie si une source donnée existe déjà dans la base Chroma persistée.
+     Args:
+         chemin (str): Dossier de persistance de Chroma.
+         source_name (str): Nom de la source à chercher dans les métadonnées.
+         embedding_model: Modèle d'embedding utilisé pour initier Chroma.
+ 
+     Returns: True si la source est déjà indexée, False sinon.
+     """
+     
+     # Charge la base Chroma existante
+     chroma_db = Chroma(
+         persist_directory=chemin,
+         embedding_function=embedding_model)
+ 
+     retriever = chroma_db.as_retriever()
+     docs = retriever.invoke("tsst", filter={"source": source_name})
+ 
+     return len(docs) > 0
+ 
 def input_data_chromasdb(chunks_dict, nom_source, embedding_model, chemin):
     texts = list(chunks_dict.values())  # contenu des articles
     metadatas = [

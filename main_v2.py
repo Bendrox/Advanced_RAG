@@ -2,9 +2,7 @@
 from data_pipelines.url_extractor import pipe_1_url_to_pdf
 from data_pipelines.token_counter import count_tokens
 from data_pipelines.txt_saver_loader import load_txt
-from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
-                                          nettoyer_markdown, weird_carac_remove, 
-                                          supr_avant_reglement_mrk, supr_apres_reglement_mrk)
+from data_pipelines.data_cleaning import pipe_3_nettoyer_texte
 
 from data_pipelines.txt_saver_loader import load_txt, save_txt, save_dict_json
 from data_pipelines.pdf_loader_to_txt import pipe_2_pdf_to_txt
@@ -32,10 +30,10 @@ print("Début de l'étape 1: injection des données")
 
 
 chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
-source_name = "aml_5"
+source_name = "aml_5" # "aml_5"
 url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
 url_crr="http://publications.europa.eu/resource/celex/32013R0575"
-
+nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
 print("---------------------------------------")
@@ -45,7 +43,7 @@ print("Début de l'étape 2: récupération des données depuis Eurlex , sauvgar
 
 if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf"): 
     print("Etape 2: Fichier n'existe pas , récupération en cours")
-    scrape_result = pipe_1_url_to_pdf(url_aml5)
+    scrape_result = pipe_1_url_to_pdf(url_aml5,"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf")
     
     save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf",scrape_result)
 else:
@@ -63,14 +61,11 @@ print("---------------------------------------")
 
 ####### Step 4: Netoyage du text brut 
 print("Début de l'étape 4: Netoyage du text brut (en 5 étapes)")
-scrape_result_1= supr_avant_directive_mrk(scrape_result)
-scrape_result_2= supr_apres_directive_mrk(scrape_result_1)
-scrape_result_3= nettoyer_markdown(scrape_result_2)
-scrape_result_4= nettoyer_markdown(scrape_result_3)
-scrape_result_5= weird_carac_remove(scrape_result_4)
+scrape_result_clean = pipe_3_nettoyer_texte(scrape_result)
+
 print("Succès de l'étape 4: Netoyage du text brut (en 5 étapes)")
-print(f"Nombre de token après nettoyage du text: {count_tokens(scrape_result_5)}")
-diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_5)
+print(f"Nombre de token après nettoyage du text: {count_tokens(scrape_result_clean)}")
+diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_clean)
 print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
 print("---------------------------------------")
 
@@ -82,8 +77,8 @@ art_1_old = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/
 art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/art_l561_2_new.txt")
 
 # Inject data for QA 
-lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_5, art_1_old, art_1_new)
-lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_5, art_1_old, art_1_new)
+lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
+lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
 
 # save llm response 
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
@@ -97,7 +92,8 @@ print("Début de l'étape 6: RAG building")
 
 # chunking 
 print("Début de l'étape 6.1: chunking")
-chunks = chunker_optimal(scrape_result_5)
+chunks = chunker_optimal(scrape_result_clean)
+chunks= chunks[:nbr_art]
 print("Fin de l'étape 6.1: chunking")
 print("---------------------------------------")
 

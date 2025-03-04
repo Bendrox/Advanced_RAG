@@ -38,16 +38,17 @@ print("---------------------------------------")
 ###### Step 2: Eurlex URL to PDF
 print("Début de l'étape 2: récupération des données depuis Eurlex , sauvgarde puis chargement depuis fichier local")
 
-if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf"): 
+if not os.path.exists(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf"): 
     print("Etape 2: Fichier n'existe pas , récupération en cours")
-    scrape_result = pipe_1_url_to_pdf(url_aml5,"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf")
-    
-    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf",scrape_result)
+
+    pipe_1_url_to_pdf(url_aml5,f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
+    print("Etape 2: Fichier sauvgardé localement avec succès")
+
 else:
-    print("Etape 2: fichier existe récupération a partir du fichier local")
+    print("Etape 2: fichier existe, récupération a partir du fichier local")
     scrape_result= pipe_1_url_to_pdf("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf")
     
-print("Etape 2 terminée")
+print("Etape 2 terminée: données européennes en local.")
 print("---------------------------------------")
 
 ###### Step 3: calcul nombre de token de l'extraction brute 

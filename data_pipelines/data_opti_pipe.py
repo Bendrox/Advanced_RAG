@@ -4,15 +4,14 @@ import fitz
 import re
 
 # step 1: url -> local pdf
-def pipe_1_url_to_pdf(url, save_path):
+def pipe_1_url_to_pdf(url :str, save_path: str):
     """Optimized pipeline Transform local URL eurlex to a local file PDF
 
     Args:
         url (_type_): url of eurlex , exemple: http://publications.europa.eu/resource/celex/32013R0575
         save_path (_type_): give your local path
     """
-    response = requests.get(url, 
-                            headers={"Accept": "application/pdf"})
+    response = requests.get(url, headers={"Accept": "application/pdf"})
     # tres important pour ne pas renvoyer rdf ou autre format...
     with open(save_path, "wb") as f:
         f.write(response.content)

@@ -1,7 +1,9 @@
 
+import requests
+import fitz
+import re
 
-# step 1: 
-
+# step 1: url -> local pdf
 def pipe_1_url_to_pdf(url, save_path):
     """Optimized pipeline Transform local URL eurlex to a local file PDF
 
@@ -15,9 +17,15 @@ def pipe_1_url_to_pdf(url, save_path):
     with open(save_path, "wb") as f:
         f.write(response.content)
         
+# step 2: local pdf -> txt
+def pipe_2_extract_text_with_pymupdf(pdf_path):
+    doc = fitz.open(pdf_path)
+    text = ""
+    for page in doc:
+        text += page.get_text()
+    return text.strip() 
 
 # step 3: 
-
 def pipe_3_nettoyer_texte(texte):
     # 1. Supprime les caractères de coupure de mot suivis de retour à la ligne
     texte = re.sub(r'\xad\n', '', texte)

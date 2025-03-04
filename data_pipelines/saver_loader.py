@@ -3,10 +3,10 @@ import json
 
 def load_txt(filepath: str):
     """
-    Charge un fichier txt dans une variable str
+    Charge un fichier txt local dans une variable str
+    
     Args: filepath (str)
     Returns: str
-    
     """
     with open(filepath, "r", encoding="utf-8") as file:
         return file.read()
@@ -24,6 +24,12 @@ def save_txt(filepath: str, text: str):
         fichier.write(text)
 
 def save_dict_json(filepath: str, dict: dict):
+    """sauvgarde un fichier dict en json dans un fichier local.
+
+    Args:
+        filepath (str): chemin sauvarde du fichier json
+        dict (dict): nom de la variable 
+    """
     with open(filepath, "w", encoding="utf-8") as fichier:
         json.dump( #écrit le dictionnaire dans un fichier
                 dict, 

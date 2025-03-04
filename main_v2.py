@@ -28,10 +28,11 @@ print("Début de l'étape 1: injection des données")
 
 chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
 source_name = "aml_5" # "aml_5"
-url_aml5="http://publications.europa.eu/resource/celex/32015L0849"
-url_crr="http://publications.europa.eu/resource/celex/32013R0575"
-lcqa="Oui"  # "Oui" "Non"
-url_ue=url_aml5 # ici choix aml5
+url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L0849"
+url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
+
+lcqa="Non"  # "Oui" "Non"
+url_ue=url_aml_5_pdf # ici choix aml5
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -44,12 +45,12 @@ if not os.path.exists(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scra
     print("Etape 2: Fichier n'existe pas , récupération en cours")
 
     pipe_1_url_to_pdf(url_ue,f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
-    print("Etape 2: Fichier sauvegardé localement avec succès")
-    scrape_result=pipe_2_pdf_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
+    print("Etape 2: Fichier sauvegardé localement avec succès !")
+    scrape_result=pipe_2_pdf_txt(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
 
 else:
     print("Etape 2: fichier existe dans répertoire local")
-    scrape_result=pipe_2_pdf_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
+    scrape_result=pipe_2_pdf_txt(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
     
 print("Etape 2 terminée: données européennes en local.")
 print("---------------------------------------")
@@ -105,7 +106,7 @@ print("---------------------------------------")
 # list to dict 
 print("Début de l'étape 6.2: list to dict")
 chunks_dic=chunks_list_to_dict(chunks)
-save_dict_json("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_output_chunks/chunks.json", chunks_dic)
+save_dict_json("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks.json", chunks_dic)
 print("Fin de l'étape 6.2: list to dict")
 print("---------------------------------------")
 

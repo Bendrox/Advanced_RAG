@@ -1,30 +1,30 @@
-Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les deux versions du texte de loi français et identifier les modifications. Ensuite, nous devons trouver les articles de la directive européenne qui correspondent à ces modifications.
+Pour analyser les changements réglementaires dans la loi française et identifier les parties de la directive européenne à l'origine de ces changements, nous devons comparer les deux versions du texte de loi français et identifier les modifications. Ensuite, nous devons relier ces modifications aux articles pertinents de la directive européenne.
 
 ### Changements Identifiés
 
 1. **Suppression des prestataires de services sur crypto-actifs**:
-   - Avant modification: Les prestataires de services sur crypto-actifs étaient mentionnés dans plusieurs points (1° quater, 7° bis a), 7° quater b)).
-   - Après modification: Les mentions spécifiques aux prestataires de services sur crypto-actifs ont été supprimées.
+   - Avant modification: Les prestataires de services sur crypto-actifs étaient mentionnés dans les points 1° quater, 7° bis a), 7° quater a) et b).
+   - Après modification: Les prestataires de services sur crypto-actifs ne sont plus mentionnés.
 
-2. **Modification des articles de référence pour les institutions d'émission**:
-   - Avant modification: Références à l'article L. 721-7 et L. 721-18 et L. 721-19.
-   - Après modification: Références à l'article L. 711-2 et L. 712-4.
+2. **Modification des articles de référence pour certaines institutions**:
+   - Avant modification: Références à l'article L. 721-7 et L. 721-18 du code monétaire et financier.
+   - Après modification: Références à l'article L. 711-2 et L. 712-4 du code monétaire et financier.
 
 3. **Modification des professions juridiques**:
-   - Avant modification: Les professions juridiques incluaient les commissaires de justice.
-   - Après modification: Les professions juridiques incluent les huissiers de justice et les commissaires-priseurs judiciaires.
+   - Avant modification: Les professions juridiques incluaient les avocats, les notaires, les commissaires de justice, les administrateurs judiciaires et les mandataires judiciaires.
+   - Après modification: Les professions juridiques incluent les avocats, les notaires, les huissiers de justice, les administrateurs judiciaires, les mandataires judiciaires et les commissaires-priseurs judiciaires.
 
-### Correspondance avec la Directive Européenne
+### Correspondance avec la Directive Européenne 2015/849
 
 1. **Suppression des prestataires de services sur crypto-actifs**:
-   - **Directive Européenne**: Article 2, paragraphe 1, point 3) a) à d) et f) mentionne les entités assujetties, mais ne fait pas de mention spécifique aux prestataires de services sur crypto-actifs. La suppression dans la loi française pourrait être une alignement avec la directive qui ne les mentionne pas explicitement.
+   - **Directive Européenne**: La directive 2015/849 ne mentionne pas spécifiquement les prestataires de services sur crypto-actifs. Les modifications peuvent être liées à une réévaluation des risques associés à ces services, conformément à l'article 7 de la directive qui exige des États membres de prendre des mesures appropriées pour identifier, évaluer, comprendre et atténuer les risques de blanchiment de capitaux et de financement du terrorisme.
 
-2. **Modification des articles de référence pour les institutions d'émission**:
-   - **Directive Européenne**: Article 3, définitions, notamment les points concernant les établissements de crédit et les établissements financiers. La modification des articles de référence pourrait être une mise à jour pour aligner avec les définitions et les exigences de la directive.
+2. **Modification des articles de référence pour certaines institutions**:
+   - **Directive Européenne**: La directive 2015/849 ne spécifie pas les articles de référence pour les institutions financières. Les modifications peuvent être une mise à jour technique pour aligner les références législatives avec les textes en vigueur.
 
 3. **Modification des professions juridiques**:
-   - **Directive Européenne**: Article 2, paragraphe 1, point 3) a) et b) mentionne les notaires et autres membres de professions juridiques indépendantes. L'ajout des huissiers de justice et des commissaires-priseurs judiciaires dans la loi française pourrait être une réponse à l'article 2 de la directive qui inclut les professions juridiques indépendantes.
+   - **Directive Européenne**: L'article 2 de la directive 2015/849 inclut les professions juridiques indépendantes lorsqu'elles participent à des transactions financières ou immobilières. La modification pour inclure les huissiers de justice et les commissaires-priseurs judiciaires peut être une réponse à l'article 2(1)(3)(b) de la directive, qui élargit le champ d'application aux professions juridiques indépendantes impliquées dans des transactions financières.
 
 ### Conclusion
 
-Les modifications apportées à la loi française semblent être motivées par les articles de la directive européenne qui définissent les entités assujetties et les professions juridiques indépendantes. Les changements visent à aligner la loi française avec les exigences et les définitions de la directive européenne, notamment les articles 2 et 3 de la directive.
+Les modifications apportées à la loi française semblent être motivées par les exigences de la directive européenne 2015/849, notamment en ce qui concerne l'évaluation des risques et l'inclusion de professions juridiques indépendantes. Les changements spécifiques aux prestataires de services sur crypto-actifs et les mises à jour des références législatives peuvent être des ajustements techniques pour se conformer aux normes européennes et améliorer la clarté et l'efficacité de la réglementation nationale.

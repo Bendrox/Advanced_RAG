@@ -1,11 +1,10 @@
-# Importing data pipelines
-from data_pipelines.url_extractor import pipe_1_url_to_pdf
-from data_pipelines.token_counter import count_tokens
-from data_pipelines.txt_saver_loader import load_txt
-from data_pipelines.data_cleaning import pipe_3_nettoyer_texte
+# Global import 
+import os 
 
-from data_pipelines.txt_saver_loader import load_txt, save_txt, save_dict_json
-from data_pipelines.pdf_loader_to_txt import pipe_2_pdf_to_txt
+# Importing data pipelines
+from data_pipelines.data_opti_pipe import pipe_1_url_to_pdf, pipe_2_pdf_txt, pipe_3_nettoyer_texte
+from data_pipelines.token_counter import count_tokens
+from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
@@ -17,8 +16,6 @@ from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
 from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb
 
-# Global import 
-import os 
 
 # Langchain 
 from langchain_chroma import Chroma

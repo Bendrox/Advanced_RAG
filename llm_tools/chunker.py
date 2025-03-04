@@ -5,7 +5,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 
 def chunker_optimal(input_data_to_chunk):
-    """Optimal chunker for AML5 + CRR
+    """Optimal chunker tested on AML5 + CRR
 
     Args:
         input_data_to_chunk (_type_): _description_

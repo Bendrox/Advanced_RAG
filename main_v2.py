@@ -7,6 +7,7 @@ from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_d
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
 from data_pipelines.txt_saver_loader import load_txt, save_txt, save_dict_json
+from data_pipelines.pdf_loader_to_txt import pipe_2_pdf_to_txt
 
 ## importing LLM
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
@@ -39,16 +40,17 @@ url_crr="http://publications.europa.eu/resource/celex/32013R0575"
 print("Etape 1 terminée")
 print("---------------------------------------")
 
-###### Step 2: scraping data with firecrawl
-print("Début de l'étape 2: récupération des données avec firecrawl ou chargement depuis fichier local")
+###### Step 2: Eurlex URL to PDF
+print("Début de l'étape 2: récupération des données depuis Eurlex , sauvgarde puis chargement depuis fichier local")
 
-if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt"): 
-    print("Etape 2: Fichier n'existe pas , appel a Firecrawl pour récupération")
-    scrape_result = firecrawl_extractor_mrkd(url_aml5)
-    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt",scrape_result)
+if not os.path.exists("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf"): 
+    print("Etape 2: Fichier n'existe pas , récupération en cours")
+    scrape_result = pipe_1_url_to_pdf(url_aml5)
+    
+    save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf",scrape_result)
 else:
     print("Etape 2: fichier existe récupération a partir du fichier local")
-    scrape_result= load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.txt")
+    scrape_result= pipe_1_url_to_pdf("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/aml5.pdf")
     
 print("Etape 2 terminée")
 print("---------------------------------------")

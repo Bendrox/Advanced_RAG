@@ -1,4 +1,5 @@
 import tiktoken
+import numpy as np
 
 def count_tokens(text: str, model: str = "gpt-4o") -> int:
     """
@@ -18,3 +19,15 @@ def count_tokens(text: str, model: str = "gpt-4o") -> int:
     tokens = encoding.encode(text)
     token_count = len(tokens)
     return token_count
+
+def chunk_stat(your_chunks):
+    """Produit des stats sur le nombre de tokens par chunks. 
+    Pour but d'améliorer les performances 
+
+    Args:your_chunks (_type_)
+    """
+    chunk_lengths = [count_tokens(chunk) for chunk in your_chunks]
+    print("Nombre de chunks :", len(your_chunks))
+    print("Longueur moyenne des chunks:", np.mean(chunk_lengths))
+    print("Longueur max des chunks:", np.max(chunk_lengths))
+    print("Longueur min des chunks:", np.min(chunk_lengths))

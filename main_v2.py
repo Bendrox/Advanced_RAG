@@ -7,7 +7,7 @@ from data_pipelines.token_counter import count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
-from llm_tools.chunker import chunker_optimal, chunks_list_to_dict
+from llm_tools.chunker import chunker_optimal, chunks_list_to_dict, chunk_stat
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
@@ -98,11 +98,11 @@ print("Début de l'étape 6: RAG . Décomposition du RAG en plusieurs étapes:")
 print("---------------------------------------")
 
 # étape 6.1: chunking 
-print("Début de l'étape 6.1: Chunking")
+print("Début de l'étape 6.1: Chunking\n")
 chunks = chunker_optimal(scrape_result_clean)
 chunks= chunks[1:nbr_art]
-nbr_chunk=len(chunks)
-print(f"Nombre de chunks créés: {nbr_chunk}")
+print(f"Statistiques sur les chunks créés:")
+print(f"{chunk_stat(chunks)}")
 print("Fin de l'étape 6.1: Chunking")
 print("---------------------------------------")
 
@@ -123,7 +123,8 @@ if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
 
 else:
     print('Données non existentes dans ChromasDB, chargement en cours...') 
-    vector_chromasdb = input_data_chromasdb(chunks_dic, source_name, 
+    vector_chromasdb = input_data_chromasdb(chunks_dic, 
+                                            source_name, 
                                             emb_3_large, 
                                                     "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
     print(vector_chromasdb._collection.count())        

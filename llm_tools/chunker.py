@@ -1,8 +1,7 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-# attention RecursiveCharacterTextSplitter	Si le « morceau » résultant dépasse chunk_size, 
-# il redescend au séparateur suivant (plus petit).
-
+from data_pipelines.token_counter import count_tokens
+import numpy as np
 
 def chunker_optimal(input_data_to_chunk):
     """Optimal chunker tested on AML5 + CRR
@@ -24,3 +23,14 @@ def chunks_list_to_dict(chunks):
     chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
     return chunks_dic
 
+def chunk_stat(your_chunks):
+    """Produit des stats sur le nombre de tokens par chunks. 
+    Pour but d'améliorer les performances 
+
+    Args:your_chunks (_type_)
+    """
+    chunk_lengths = [count_tokens(chunk) for chunk in your_chunks]
+    print("Nombre de chunks :", len(your_chunks))
+    print("Longueur moyenne des chunks:", np.mean(chunk_lengths))
+    print("Longueur max des chunks:", np.max(chunk_lengths))
+    print("Longueur min des chunks:", np.min(chunk_lengths))

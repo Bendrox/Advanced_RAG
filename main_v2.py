@@ -24,7 +24,7 @@ from langchain_chroma import Chroma
 
 ###### Step 1: inject data
 print("---------------------------------------")
-print("Début de l'étape 1: injection des données")
+print("Début de l'étape 1: injection des données (local paths , URLs, Options utilisateur...)")
 
 
 chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
@@ -40,7 +40,7 @@ print("Etape 1 terminée")
 print("---------------------------------------")
 
 ###### Step 2: Eurlex URL to PDF
-print("Début de l'étape 2: récupération des données depuis Eurlex , sauvgarde puis chargement depuis fichier local")
+print("Début de l'étape 2: récupération des données depuis Eurlex , sauvegarde puis chargement depuis fichier local")
 
 if not os.path.exists(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf"): 
     print("Etape 2: Fichier n'existe pas , récupération en cours")
@@ -50,7 +50,7 @@ if not os.path.exists(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scra
     scrape_result=pipe_2_pdf_txt(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
 
 else:
-    print("Etape 2: fichier existe dans répertoire local")
+    print("Etape 2: Fichier existant dans répertoire local")
     scrape_result=pipe_2_pdf_txt(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_scrapped/{source_name}.pdf")
     
 print("Etape 2 terminée: données européennes en local.")
@@ -94,24 +94,27 @@ print("Fin de l'étape 5: Long context Question answering")
 print("---------------------------------------")
 
 ###### Step 6: RAG 
-print("Début de l'étape 6: RAG ")
+print("Début de l'étape 6: RAG . Décomposition du RAG en plusieurs étapes:")
+print("---------------------------------------")
 
 # étape 6.1: chunking 
-print("Début de l'étape 6.1: chunking")
+print("Début de l'étape 6.1: Chunking")
 chunks = chunker_optimal(scrape_result_clean)
 chunks= chunks[1:nbr_art]
-print("Fin de l'étape 6.1: chunking")
+nbr_chunk=len(chunks)
+print(f"Nombre de chunks créés: {nbr_chunk}")
+print("Fin de l'étape 6.1: Chunking")
 print("---------------------------------------")
 
 # étape 6.2: list to dict 
-print("Début de l'étape 6.2: list to dict")
+print("Début de l'étape 6.2: List to dict")
 chunks_dic=chunks_list_to_dict(chunks)
 save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}.json", chunks)
-print("Fin de l'étape 6.2: list to dict")
+print("Fin de l'étape 6.2: List to dict")
 print("---------------------------------------")
 
 # étape 6.3: embedding + stockage chromasdb
-print("Début de l'étape 6.3: chunks to vector database")
+print("Début de l'étape 6.3: Chunks to vector database")
 
 if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
     print('Données existentes dans ChromasDB') 
@@ -120,11 +123,12 @@ if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
 
 else:
     print('Données non existentes dans ChromasDB, chargement en cours...') 
-    vector_chromasdb = input_data_chromasdb(chunks_dic, source_name, emb_3_large, 
+    vector_chromasdb = input_data_chromasdb(chunks_dic, source_name, 
+                                            emb_3_large, 
                                                     "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
     print(vector_chromasdb._collection.count())        
     
-print("Fin de l'étape 6.3: chunks to vector database, ")
+print("Fin de l'étape 6.3: Chunks to vector database, ")
 print("---------------------------------------")
 
 # étape 6.4: QA retreival test:
@@ -139,7 +143,8 @@ for res in res_qa_retreival:
     print(f"*** {res.page_content} [{res.metadata}]\n")
     
 res_qa_retreival_str=str(res_qa_retreival)
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",res_qa_retreival_str)
+save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",
+         res_qa_retreival_str)
 print("Fin de l'étape 6.4: Question test article retreival")
 print("---------------------------------------")
 

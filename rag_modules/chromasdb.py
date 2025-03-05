@@ -34,7 +34,8 @@ def input_data_chromasdb(chunks_dict, nom_source, embedding_model, chemin):
         texts=texts,
         metadatas=metadatas,
         persist_directory=chemin,
-        embedding=embedding_model
+        embedding=embedding_model,
+        collection_metadata = {"hnsw:space": "cosine"} ## important car valeur par default L2 (dist eucl)
     )
     return chroma_db
 

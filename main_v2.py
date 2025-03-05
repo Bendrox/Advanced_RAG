@@ -14,7 +14,8 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 #importing RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
-from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb, qa_vector_chromasdb_simil_score
+from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
+                            qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal)
 
 
 # Langchain 
@@ -156,7 +157,7 @@ print("---------------------------------------")
 # Etape 6.6 : similarity retreival :
 print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
 
-qa_vector_chromasdb_simil_score(vector_chromasdb,question,4,source_name)
+qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,4,source_name)
 
 
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")

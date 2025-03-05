@@ -21,7 +21,10 @@ def qa_vector_chromasdb(vector_chromasdb, question, k_numer ,source_filter):
     docs = vector_chromasdb.similarity_search(question,k_numer, filter={"source":source_filter})
     return docs
 
-
+def qa_vector_chromasdb_simil_score(vector_chromasdb, question, k_numer ,source_filter):
+    results = vector_chromasdb.similarity_search_with_score(query=question,k=k_numer,filter={"source":source_filter})
+    for doc, score in results:
+        print(f"* [SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
 
 def qa_llm_vectordb_chroma(vectordb_name,question,k):
     """

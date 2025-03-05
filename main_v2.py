@@ -14,7 +14,7 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 #importing RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
-from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb
+from rag_modules.qa import  qa_llm_vectordb_chroma, qa_vector_chromasdb, qa_vector_chromasdb_simil_score
 
 
 # Langchain 
@@ -62,10 +62,10 @@ print("Etape 3 terminée")
 print("---------------------------------------")
 
 ####### Step 4: Netoyage du text brut 
-print("Début de l'étape 4: Netoyage du text brut (en 5 étapes)")
+print("Début de l'étape 4: Netoyage du text brut ")
 scrape_result_clean = pipe_3_nettoyer_texte(scrape_result)
 
-print("Succès de l'étape 4: Netoyage du text brut (en 5 étapes)")
+print("Succès de l'étape 4: Netoyage du text brut ")
 print(f"Nombre de token après nettoyage du text: {count_tokens(scrape_result_clean)}")
 diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_clean)
 print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
@@ -87,34 +87,29 @@ if lcqa == "Oui":
     save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
     save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
 
-
 else: print("Choix de l'utilisateur de ne pas faire du Long context Question answering.")
 
 print("Fin de l'étape 5: Long context Question answering")
 print("---------------------------------------")
 
 ###### Step 6: RAG 
-print("Début de l'étape 6: RAG building")
+print("Début de l'étape 6: RAG ")
 
-# chunking 
+# étape 6.1: chunking 
 print("Début de l'étape 6.1: chunking")
 chunks = chunker_optimal(scrape_result_clean)
 chunks= chunks[:nbr_art]
 print("Fin de l'étape 6.1: chunking")
 print("---------------------------------------")
 
-# list to dict 
+# étape 6.2: list to dict 
 print("Début de l'étape 6.2: list to dict")
 chunks_dic=chunks_list_to_dict(chunks)
 save_dict_json("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks.json", chunks_dic)
 print("Fin de l'étape 6.2: list to dict")
 print("---------------------------------------")
 
-# output:
-# {'Article 69': 'Les États membres sont destinataires de la présente directive...'}
-
-# embedding + stockage chromasdb
-# funct_embedding_openai_3l()
+# étape 6.3: embedding + stockage chromasdb
 print("Début de l'étape 6.3: chunks to vector database")
 
 if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
@@ -131,29 +126,45 @@ else:
 print("Fin de l'étape 6.3: chunks to vector database, ")
 print("---------------------------------------")
 
-# QA retreival test:
-print("Début de l'étape 6.3: Question test")
+# étape 6.4: QA retreival test:
+print("Début de l'étape 6.4: Question test article retreival")
 
 question="Est est l'objectif de la directive ?"
 res_qa_retreival= qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
 
-print("Résultats de l'étape 6.3:")
-print(question)
+print(f"\nQuestion de l'utilisateur: {question}")
+print(f"\nRetreival result:\n")
 for res in res_qa_retreival:
-    print(f"* {res.page_content} [{res.metadata}]")
+    print(f"*** {res.page_content} [{res.metadata}]\n")
     
 res_qa_retreival_str=str(res_qa_retreival)
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",res_qa_retreival_str)
-print("Fin de l'étape 6.3: Question test")
+print("Fin de l'étape 6.4: Question test article retreival")
 print("---------------------------------------")
 
-# QA retreival + llm test:
-print("Début de l'étape 6.4: QA with llm test")
+# étape 6.5: QA retreival + llm test:
+print("Début de l'étape 6.5: QA article retreival + llm \n")
+
 res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,4)
 print(res_rag_1['answer'])
 res_rag_1_str = str(res_rag_1['answer'])
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
-print("Fin de l'étape 6.4: QA with llm test")
+
+print("\nFin de l'étape 6.5: QA article retreival + llm ")
 print("---------------------------------------")
+
+# Etape 6.6 : similarity retreival :
+print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
+
+qa_vector_chromasdb_simil_score(vector_chromasdb,question,4,source_name)
+
+
+print("\nFin de l'étape 6.6: QA article retreival similarity score ")
+
+# étape 6.6: reranking :
+# option 1: llm
+# option 2: modeles: cohere rerank 
+
+
 
 ###### Step 7:

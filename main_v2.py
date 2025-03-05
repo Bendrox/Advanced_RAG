@@ -146,7 +146,7 @@ print("---------------------------------------")
 # étape 6.5: QA retreival + llm test:
 print("Début de l'étape 6.5: QA article retreival + llm \n")
 
-res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,4)
+res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,3)
 print(res_rag_1['answer'])
 res_rag_1_str = str(res_rag_1['answer'])
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
@@ -156,10 +156,7 @@ print("---------------------------------------")
 
 # Etape 6.6 : similarity retreival :
 print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
-
-qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,4,source_name)
-
-
+qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,3,source_name)
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")
 
 # étape 6.6: reranking :

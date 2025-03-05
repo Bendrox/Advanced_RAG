@@ -99,14 +99,14 @@ print("Début de l'étape 6: RAG ")
 # étape 6.1: chunking 
 print("Début de l'étape 6.1: chunking")
 chunks = chunker_optimal(scrape_result_clean)
-chunks= chunks[:nbr_art]
+chunks= chunks[1:nbr_art]
 print("Fin de l'étape 6.1: chunking")
 print("---------------------------------------")
 
 # étape 6.2: list to dict 
 print("Début de l'étape 6.2: list to dict")
 chunks_dic=chunks_list_to_dict(chunks)
-save_dict_json("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks.json", chunks_dic)
+save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}.json", chunks)
 print("Fin de l'étape 6.2: list to dict")
 print("---------------------------------------")
 

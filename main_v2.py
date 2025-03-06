@@ -7,7 +7,7 @@ from data_pipelines.token_counter import count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
-from llm_tools.chunker import chunker_optimal, chunks_list_to_dict, chunk_stat
+from llm_tools.chunker import chunker_art, chunks_list_to_dict, chunk_stat
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
@@ -31,6 +31,10 @@ chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/ch
 source_name = "aml_5" # "aml_5"
 url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L0849"
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
+
+question_test_1="Est est l'objectif de la directive ?"
+question_test_2 = "modifications apportées à l'article visent principalement à élargir et clarifier le champ d'application des groupes concernés par les obligations de transmission d'informations, tout en maintenant les principes fondamentaux de secret professionnel et de protection des données."
+question= question_test_2 #choix question ici 
 
 lcqa="Non"  # "Oui" "Non"
 url_ue= url_aml_5_pdf # ici choix aml5
@@ -99,7 +103,7 @@ print("---------------------------------------")
 
 # étape 6.1: chunking 
 print("Début de l'étape 6.1: Chunking\n")
-chunks = chunker_optimal(scrape_result_clean)
+chunks = chunker_art(scrape_result_clean)
 chunks= chunks[1:nbr_art]
 print(f"Statistiques sur les chunks créés:")
 print(f"{chunk_stat(chunks)}")
@@ -135,7 +139,7 @@ print("---------------------------------------")
 # étape 6.4: QA retreival test:
 print("Début de l'étape 6.4: Question test article retreival")
 
-question="Est est l'objectif de la directive ?"
+
 res_qa_retreival= qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
 
 print(f"\nQuestion de l'utilisateur: {question}")
@@ -165,8 +169,12 @@ print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
 qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,3,source_name)
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")
 
-# étape 6.6: reranking :
+# Etape 6.7: Reranking :
+
+
 # option 1: llm
+
+
 # option 2: modeles: cohere rerank 
 
 

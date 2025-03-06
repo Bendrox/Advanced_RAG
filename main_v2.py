@@ -7,7 +7,7 @@ from data_pipelines.token_counter import count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
-from llm_tools.chunker import chunker_art, chunks_list_to_dict, chunk_stat
+from llm_tools.chunker import chunker_1 ,chunker_2,chunker_3, chunks_list_to_dict, chunk_stat
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
@@ -103,7 +103,7 @@ print("---------------------------------------")
 
 # étape 6.1: chunking 
 print("Début de l'étape 6.1: Chunking\n")
-chunks = chunker_art(scrape_result_clean)
+chunks = chunker_1(scrape_result_clean)
 chunks= chunks[1:nbr_art]
 print(f"Statistiques sur les chunks créés:")
 print(f"{chunk_stat(chunks)}")
@@ -118,6 +118,8 @@ print("Fin de l'étape 6.2: List to dict")
 print("---------------------------------------")
 
 # étape 6.3: embedding + stockage chromasdb
+# Essayer Milvus , FAISS
+
 print("Début de l'étape 6.3: Chunks to vector database")
 
 if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
@@ -170,7 +172,7 @@ qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,3,source_name)
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")
 
 # Etape 6.7: Reranking :
-
+# - Azure AI Search 
 
 # option 1: llm
 

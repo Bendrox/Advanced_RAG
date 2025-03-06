@@ -26,18 +26,26 @@ from langchain_chroma import Chroma
 print("---------------------------------------")
 print("Début de l'étape 1: injection des données (local paths , URLs, Options utilisateur...)")
 
-
-chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
-source_name = "aml_5" # "aml_5"
+### Variables statiques:
 url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L0849"
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
 
+### Choix utilisateur:
+# 1) Question RAG: 
 question_test_1="Est est l'objectif de la directive ?"
 question_test_2 = "modifications apportées à l'article visent principalement à élargir et clarifier le champ d'application des groupes concernés par les obligations de transmission d'informations, tout en maintenant les principes fondamentaux de secret professionnel et de protection des données."
 question= question_test_2 #choix question ici 
 
+# 2) Long context question ansering 
 lcqa="Non"  # "Oui" "Non"
+
+# 3) Contenu UE: réglement / directive: 
 url_ue= url_aml_5_pdf # ici choix aml5
+source_name = "aml_5" # "aml_5"
+
+# 4) Chunk strategies:
+chunk_stratégie="" # 1 pour articles, 2 pour chapitre/ selection/ article, 3 + alinéa
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -103,6 +111,15 @@ print("---------------------------------------")
 
 # étape 6.1: chunking 
 print("Début de l'étape 6.1: Chunking\n")
+
+# Modular 3 cases
+if chunk_stratégie == 1:
+    chunks=chunker_1(scrape_result_clean)
+elif chunk_stratégie == 2:
+    chunks=chunker_2(scrape_result_clean)
+else:
+    chunks=chunker_3(scrape_result_clean)
+    
 chunks = chunker_1(scrape_result_clean)
 chunks= chunks[1:nbr_art]
 print(f"Statistiques sur les chunks créés:")

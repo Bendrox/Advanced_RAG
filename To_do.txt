@@ -1,0 +1,51 @@
+Voici quelques constats et pistes d’amélioration possibles :
+	1.	Scores de similarité faibles et disparates
+	•	Les valeurs présentées (0.148, 0.117, 0.109) sont plutôt basses, ce qui suggère que les extraits 
+    retrouvés ne sont pas très « proches » sémantiquement de la requête initiale (ou bien que votre seuil 
+    de similarité est trop strict/relâché).
+	•	Quand les scores sont aussi bas, cela peut indiquer que le modèle de recherche s’appuie davantage 
+    sur une correspondance superficielle (bag-of-words, mots-clés trop génériques) ou qu’il manque de contexte
+     pour mieux comprendre la requête et les textes cibles.
+
+	2.	Possibles raisons des résultats peu pertinents
+	•	Modèle de recherche trop simple : si vous utilisez une approche basée sur des techniques de similarité 
+    lexicales (par ex. TF-IDF ou BM25) ou sur des embeddings peu spécialisés (Word2Vec généraliste, etc.), 
+    le modèle peut ne pas bien capter les nuances juridiques et le contexte de la directive AML.
+	•	Absence de désambiguïsation : les textes légaux contiennent beaucoup de termes qui se ressemblent 
+    ou qui sont répétés, ce qui peut « noyer » la requête dans un flot de vocabulaire récurrent 
+    (par ex. « directive », « États membres », « blanchiment », « financement du terrorisme », etc.).
+	•	Index ou corpus incomplet ou mal segmenté : si l’indexation est faite sur des articles entiers ou des
+     blocs de texte très longs, on peut récupérer des passages hors sujet (car l’algo voit un peu de vocabulaire
+      commun et le considère comme pertinent).
+
+	3.	Comment améliorer la qualité du retrieval
+	•	Utiliser des modèles plus puissants pour l’indexation et la similarité :
+	•	Adopter des modèles d’embeddings sémantiques (par exemple basés sur BERT ou des variantes multilingues 
+    comme CamemBERT ou FlauBERT pour le français).
+	•	Mettre en place un pipeline de type Dense Passage Retrieval (DPR) ou un re-ranking par un modèle 
+    cross-encoder, qui permet de réévaluer la pertinence des passages initialement candidats et d’aboutir 
+    à un meilleur classement.
+	•	Segmenter le texte en unités plus adaptées :
+	•	Au lieu de stocker des blocs trop longs (articles entiers, paragraphes complets), découper de façon logique (paragraphes courts, sections cohérentes) pour mieux isoler les passages pertinents.
+	•	Cela peut aussi permettre de mieux afficher les extraits s’ils sont effectivement pertinents.
+	•	Adapter la requête :
+	•	Faire une requête plus contextuelle ou enrichie (ex. expansion par synonymes, prise en compte de la sémantique juridique : usage de terminologies AML/CTF).
+	•	Filtrer par métadonnées (ex. chercher spécifiquement dans les passages qui parlent de « blanchiment », « entrée en vigueur », « obligations des États membres », etc.).
+	•	Ajuster les seuils et la post-qualification :
+	•	Ajuster un seuil de similarité (en ignorant les documents en dessous d’une certaine valeur).
+	•	Mettre en place un mécanisme de post-traitement (ex. un second passage de re-ranking ou une validation 
+    par règles) pour écarter les extraits non liés au sujet.
+    
+	4.	Mettre en place un flux de QA plus robuste
+	•	Étape de retrieval (récupération des candidats) : s’appuyer sur un index dense et/ou un moteur de 
+    recherche BM25 + un reranker plus fin.
+	•	Étape de ranking ou de filtrage : utiliser un modèle de langue avancé (transformer) qui, pour chaque 
+    passage, estime sa pertinence par rapport à la question.
+	•	Étape finale de génération ou d’extraction de la réponse : si vous faites du QA pur, un modèle type 
+    question-answering (ex. BERT QA) peut extraire la réponse précise une fois le passage pertinent identifié.
+
+En résumé, on constate que les passages ramenés ont peu de rapport direct avec une requête éventuelle (ou alors ils sont trop génériques), et que les scores de similarité sont faibles. Pour améliorer la performance, il faut agir sur :
+	•	un meilleur index et une segmentation plus fine,
+	•	des modèles d’embeddings plus performants (BERT multilingue, sentence transformers, etc.),
+	•	un reranking plus sophistiqué,
+	•	éventuellement un meilleur réglage du seuil de similarité ou des stratégies de post-filtrage.

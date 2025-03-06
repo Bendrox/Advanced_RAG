@@ -2,16 +2,16 @@
 import os 
 
 # Importing data pipelines
-from data_pipelines.data_opti_pipe import pipe_1_url_to_pdf, pipe_2_pdf_txt, pipe_3_nettoyer_texte
+from data_pipelines.optim_data_pip import pipe_1_url_to_pdf, pipe_2_pdf_txt, pipe_3_nettoyer_texte
 from data_pipelines.token_counter import count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
-## importing LLM
-from llm_tools.chunker import chunker_1 ,chunker_2,chunker_3, chunks_list_to_dict, chunk_stat
+## importing for LLM
+from llm_tools.chunker import chunker_1 ,chunker_1_pipe,chunker_2,chunker_3, chunker_3_pipe, chunk_stat
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
-#importing RAG
+#importing for RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
 from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
@@ -45,7 +45,9 @@ url_ue= url_aml_5_pdf # ici choix aml5
 source_name = "aml_5" # "aml_5"
 
 # 4) Chunk strategies:
-chunk_stratégie="" # 1 pour articles, 2 pour chapitre/ selection/ article, 3 + alinéa
+chunk_stratégie=1 # 1 pour articles, 
+                  # 2 pour chapitre/ selection/ article
+                  # 3 + alinéa
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -120,7 +122,6 @@ elif chunk_stratégie == 2:
 else:
     chunks=chunker_3(scrape_result_clean)
     
-chunks = chunker_1(scrape_result_clean)
 chunks= chunks[1:nbr_art]
 print(f"Statistiques sur les chunks créés:")
 print(f"{chunk_stat(chunks)}")
@@ -129,8 +130,16 @@ print("---------------------------------------")
 
 # étape 6.2: list to dict 
 print("Début de l'étape 6.2: List to dict")
-chunks_dic=chunks_list_to_dict(chunks)
-save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}.json", chunks)
+
+if chunk_stratégie == 1:
+    chunks_dic=chunker_1_pipe(scrape_result_clean)
+elif chunk_stratégie == 2:
+    chunks_dic=chunker_2(scrape_result_clean)
+else:
+    chunks_dic=chunker_3_pipe(scrape_result_clean)
+    
+    
+save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}_strat_{chunk_stratégie}.json", chunks)
 print("Fin de l'étape 6.2: List to dict")
 print("---------------------------------------")
 

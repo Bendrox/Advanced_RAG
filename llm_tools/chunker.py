@@ -1,6 +1,6 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-
 from data_pipelines.token_counter import count_tokens
+import re
 import numpy as np
 
 def chunker_1(input_data_to_chunk: str ) -> list:
@@ -50,6 +50,25 @@ def chunker_3(input_data_to_chunk: str) -> list:
     chunks= article_splitter.split_text(input_data_to_chunk)
     return chunks
 
+def chunker_3_pipe(chunks):
+    result = []
+    metadata = {"chapter": "", "section": "", "article": ""}
+    
+    for chunk in chunks:
+        if chunk.startswith("CHAPITRE"):
+            metadata["chapter"] = chunk
+        elif chunk.startswith("SECTION"):
+            metadata["section"] = chunk
+        elif chunk.startswith("Article"):
+            metadata["article"] = chunk
+        elif re.match(r'^\d+\.', chunk):  # Paragraphe numéroté
+            num, content = re.split(r'\.', chunk, 1)
+            result.append({
+                "content": content.strip(),
+                "metadata": {**metadata, "paragraph": num}
+            })
+    
+    return result
 
 def chunks_list_to_dict(chunks):
     chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}

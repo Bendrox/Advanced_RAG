@@ -70,18 +70,36 @@ def chunker_3_pipe(chunks):
     
     return result
 
-def chunks_list_to_dict(chunks):
+def chunker_1_pipe(chunks):
     chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
     return chunks_dic
 
-def chunk_stat(your_chunks):
+def process_chunks(chunks):
+    ## Attention ne sert a rien.
+    # a adapter et implémenter pour férer le cas de présence de metadata dans les chunks
+    docs = extract_structured_data(chunks)
+    
+    # Créer des vecteurs avec métadonnées
+    embeddings = OpenAIEmbeddings()
+    vectorstore = Chroma.from_texts(
+        texts=[doc["content"] for doc in docs],
+        metadatas=[doc["metadata"] for doc in docs],
+        embedding=embeddings
+    )
+    
+    return vectorstore
+
+    
+def chunk_stat_token(your_chunks):
     """Produit des stats sur le nombre de tokens par chunks. 
     Pour but d'améliorer les performances 
 
     Args:your_chunks
     """
     chunk_lengths = [count_tokens(chunk) for chunk in your_chunks]
-    print("Nombre de chunks :", len(your_chunks))
-    print("Longueur moyenne des chunks:", np.mean(chunk_lengths))
-    print("Longueur max des chunks:", np.max(chunk_lengths))
-    print("Longueur min des chunks:", np.min(chunk_lengths))
+    print("Nombre de chunks:", len(chunk_lengths))
+    print("Nombre de token des chunks:", chunk_lengths)
+    print("Nombre de token moyen par chunk :", np.mean(chunk_lengths))
+    print("Nombre de token max par chunk :", np.max(chunk_lengths))
+    print("Nombre de token min par chunk :", np.min(chunk_lengths))
+

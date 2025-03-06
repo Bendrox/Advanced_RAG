@@ -7,7 +7,7 @@ from data_pipelines.token_counter import count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing for LLM
-from llm_tools.chunker import chunker_1 ,chunker_1_pipe,chunker_2,chunker_3, chunker_3_pipe, chunk_stat
+from llm_tools.chunker import chunker_1 ,chunker_1_pipe,chunker_2,chunker_3, chunker_3_pipe, chunk_stat_token
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
@@ -124,7 +124,7 @@ else:
     
 chunks= chunks[1:nbr_art]
 print(f"Statistiques sur les chunks créés:")
-print(f"{chunk_stat(chunks)}")
+print(f"{chunk_stat_token(chunks)}")
 print("Fin de l'étape 6.1: Chunking")
 print("---------------------------------------")
 
@@ -198,12 +198,14 @@ qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,3,source_name)
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")
 
 # Etape 6.7: Reranking :
+
 # - Azure AI Search 
+# - llm rerank 
 
 # option 1: llm
 
 
-# option 2: modeles: cohere rerank 
+# option 2: 
 
 
 

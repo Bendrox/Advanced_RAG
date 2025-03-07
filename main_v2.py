@@ -29,6 +29,8 @@ print("Début de l'étape 1: injection des données (local paths , URLs, Options
 ### Variables statiques:
 url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L0849"
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
+url_dsp2_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L2366"
+
 chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
 
 ### Choix utilisateur:

@@ -2,6 +2,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from data_pipelines.token_counter import count_tokens
 import re
 import numpy as np
+from langchain_core.documents import Document
 
 def chunker_1(input_data_to_chunk: str ) -> list:
     """Optimal chunker by article tested and approved on AML5 + CRR
@@ -35,20 +36,26 @@ def chunker_2(input_data_to_chunk: str) -> list:
     chunks= article_splitter.split_text(input_data_to_chunk)
     return chunks
 
-separators = [
-    r"\d+\.\s?[A-Z][a-z]*",  # numéros de paragraphes comme "1.Le ", "2.La ", "3.par" etc.
-    "CHAPITRE",
-    "SECTION",
-    "Article"
-]
+def chunker_3(chunks_UE_dict: dict, Directive_source:str):
+    """
+    Dictionnaire d’articles en une liste d’objets Document avec métadonnées (Directive_source , N°article)
 
-def chunker_3(input_data_to_chunk: str) -> list:
-    article_splitter = RecursiveCharacterTextSplitter(
-    separators= separators,
-    chunk_size= 100,
-    chunk_overlap=0),
-    chunks= article_splitter.split_text(input_data_to_chunk)
-    return chunks
+    Args:
+        chunks_UE_dict (dict): Dictionnaire id sont articles et les clés contenus. 
+        Directive_source (str): Nom ou référence de la directive UE. 
+
+    Returns:
+        list: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
+    """
+    documents = []
+    for article_key, article_content in chunks_UE_dict.items():
+        doc = Document(
+            page_content=article_content.lstrip(), 
+            metadata={"Directive_source": Directive_source , "N°article ": article_key[7:].strip()}, 
+            id=len(documents) + 1  # nombre de documents déjà créés 
+        )
+        documents.append(doc)
+    return documents
 
 def chunker_3_pipe(chunks):
     result = []
@@ -73,21 +80,6 @@ def chunker_3_pipe(chunks):
 def chunker_1_pipe(chunks):
     chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
     return chunks_dic
-
-def process_chunks(chunks):
-    ## Attention ne sert a rien.
-    # a adapter et implémenter pour férer le cas de présence de metadata dans les chunks
-    docs = extract_structured_data(chunks)
-    
-    # Créer des vecteurs avec métadonnées
-    embeddings = OpenAIEmbeddings()
-    vectorstore = Chroma.from_texts(
-        texts=[doc["content"] for doc in docs],
-        metadatas=[doc["metadata"] for doc in docs],
-        embedding=embeddings
-    )
-    
-    return vectorstore
 
     
 def chunk_stat_token(your_chunks):

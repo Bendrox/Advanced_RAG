@@ -18,7 +18,8 @@ def chunker_1(input_data_to_chunk: str ) -> list:
     chunk_size= 100, 
     chunk_overlap=0),
     chunks= article_splitter.split_text(input_data_to_chunk)
-    return chunks
+    chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
+    return chunks_dic
 
 def chunker_2(input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".
@@ -57,29 +58,6 @@ def chunker_3(chunks_UE_dict: dict, Directive_source:str):
         documents.append(doc)
     return documents
 
-def chunker_3_pipe(chunks):
-    result = []
-    metadata = {"chapter": "", "section": "", "article": ""}
-    
-    for chunk in chunks:
-        if chunk.startswith("CHAPITRE"):
-            metadata["chapter"] = chunk
-        elif chunk.startswith("SECTION"):
-            metadata["section"] = chunk
-        elif chunk.startswith("Article"):
-            metadata["article"] = chunk
-        elif re.match(r'^\d+\.', chunk):  # Paragraphe numéroté
-            num, content = re.split(r'\.', chunk, 1)
-            result.append({
-                "content": content.strip(),
-                "metadata": {**metadata, "paragraph": num}
-            })
-    
-    return result
-
-def chunker_1_pipe(chunks):
-    chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
-    return chunks_dic
 
     
 def chunk_stat_token(your_chunks):

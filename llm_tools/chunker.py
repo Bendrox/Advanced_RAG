@@ -40,28 +40,6 @@ def chunker_1_step_2(beginning: int,end:int,chunks_dsp2_list:list) -> dict:
     chunks_dsp2_dict = {i[:11].strip(): i[11:].strip() for i in chunks_dsp2_list_2}
     return chunks_dsp2_dict
 
-def chunker_1_step_3(chunks_UE_dict: dict, Directive_source:str):
-    """
-    ## Facultative
-    Dict : articles -> liste objects Document + métadonnées (Directive_source , N°article)
-
-    Args:
-        chunks_UE_dict (dict): Dictionnaire id sont articles et les clés contenus. 
-        Directive_source (str): Nom ou référence de la directive UE. 
-
-    Returns:
-        dict: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
-    """
-    documents = []
-    for article_key, article_content in chunks_UE_dict.items():
-        doc = Document(
-            page_content=article_content.lstrip(), 
-            metadata={"Directive_source": Directive_source , "N°article ": article_key[7:].strip()}, 
-            id=len(documents) + 1  # nombre de documents déjà créés 
-        )
-        documents.append(doc)
-    return documents
-
 def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
     """All steps optimal article chunker. Tested on AML5, CRR and DSP2.
 
@@ -78,6 +56,27 @@ def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
     chunks=[ajouter_espace_article(i) for i in chunks]
     chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
     return chunks_dic
+
+def chunker_doc(chunks_UE_dict: dict, Directive_source:str):
+    """
+    ## Option Facultative : dict -> list of docs + metadata
+    
+    Args:
+        chunks_UE_dict (dict): Dictionnaire id sont articles et les clés contenus. 
+        Directive_source (str): Nom ou référence de la directive UE. 
+
+    Returns:
+        dict: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
+    """
+    documents = []
+    for article_key, article_content in chunks_UE_dict.items():
+        doc = Document(
+            page_content=article_content.lstrip(), 
+            metadata={"Directive_source": Directive_source , "N°article ": article_key[7:].strip()}, 
+            id=len(documents) + 1  # nombre de documents déjà créés 
+        )
+        documents.append(doc)
+    return documents
 
 def chunker_2(beginning: int, end:int, input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".
@@ -99,9 +98,6 @@ def chunker_2(beginning: int, end:int, input_data_to_chunk: str) -> list:
     chunks=[ajouter_espace_article(i) for i in chunks]
     return chunks
 
-
-
-    
 def chunk_stat_token(your_chunks):
     """Produit des stats sur le nombre de tokens par chunks. 
     Pour but d'améliorer les performances 

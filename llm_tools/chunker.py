@@ -4,8 +4,25 @@ import re
 import numpy as np
 from langchain_core.documents import Document
 
-def chunker_1(input_data_to_chunk: str ) -> dict:
-    """Optimal chunker by article tested and approved on AML5, CRR and DSP2 
+def chunker_1_v1(input_data_to_chunk: str ) -> list:
+    """Optimal chunker by article tested and approved on AML5 + CRR and DSP2.
+
+    Args:
+        input_data_to_chunk (_type_): texte entrée a chunker apres conversion de pdf
+
+    Returns:
+        list: of chunks
+    """
+    article_splitter = RecursiveCharacterTextSplitter(
+    separators=   ["Article"],
+    chunk_size= 100, 
+    chunk_overlap=0)
+    chunks_list= article_splitter.split_text(input_data_to_chunk)
+    return chunks_list
+
+def chunker_1_v2(input_data_to_chunk: str ) -> dict:
+    """Optimal chunker by article tested and approved on AML5, CRR and DSP2.
+    Complete pipeline for chunks
 
     Args:
         input_data_to_chunk (str): texte entrée a chunker apres conversion de pdf

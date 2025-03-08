@@ -3,6 +3,37 @@ import os
 from chromadb import PersistentClient
 from chromadb.config import Settings
 
+def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, chemin):
+    """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.  
+
+    Args:
+        chunks_dict (dict): output of chunker_1_v1_step_2
+        nom_source (str): exemple: nom de directive
+        embedding_model (AzureOpenAI): 
+        chemin (str): local enregistre
+
+    Returns:
+        Vector database: chroma_db
+    """
+    texts = list(chunks_dict.values())  # contenu des articles
+    metadatas = [
+        {"source": nom_source, "article": article_id}
+        for article_id in chunks_dict.keys()
+    ]
+    global chroma_db
+    chroma_db = Chroma.from_texts(
+        texts=texts,
+        metadatas=metadatas,
+        persist_directory=chemin,
+        embedding=embedding_model,
+        collection_metadata = {
+        "hnsw:space": "cosine",          
+        "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
+        "hnsw:M": 16   }             # Nbr de co par vecteur
+    )
+    return chroma_db
+
+
 def source_exists_in_chroma(chemin, source_name, embedding_model):
      """
      Vérifie si une source donnée existe déjà dans la base Chroma persistée.
@@ -24,21 +55,6 @@ def source_exists_in_chroma(chemin, source_name, embedding_model):
  
      return len(docs) > 0
  
-def input_data_chromasdb(chunks_dict, nom_source, embedding_model, chemin):
-    texts = list(chunks_dict.values())  # contenu des articles
-    metadatas = [
-        {"source": nom_source, "article": article_id}
-        for article_id in chunks_dict.keys()
-    ]
-    chroma_db = Chroma.from_texts(
-        texts=texts,
-        metadatas=metadatas,
-        persist_directory=chemin,
-        embedding=embedding_model,
-        collection_metadata = {"hnsw:space": "cosine"} ## important car valeur par default L2 (dist eucl)
-    )
-    return chroma_db
-
 
 
 def load_existing_chromasdb(db_path, embedding_model):

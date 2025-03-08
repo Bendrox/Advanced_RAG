@@ -4,26 +4,25 @@ import re
 import numpy as np
 from langchain_core.documents import Document
 
-def chunker_1(input_data_to_chunk: str ) -> list:
-    """Optimal chunker by article tested and approved on AML5 + CRR
+def chunker_1(input_data_to_chunk: str ) -> dict:
+    """Optimal chunker by article tested and approved on AML5, CRR and DSP2 
 
     Args:
-        input_data_to_chunk (_type_): texte entrée a chunker apres conversion de pdf
+        input_data_to_chunk (str): texte entrée a chunker apres conversion de pdf
 
     Returns:
-        list: of chunks
+        dict: of chunks
     """
-    article_splitter = RecursiveCharacterTextSplitter(
-    separators=   ["Article"],
-    chunk_size= 100, 
-    chunk_overlap=0),
+    article_splitter = RecursiveCharacterTextSplitter(separators= ["Article"],chunk_size= 300, chunk_overlap=0)
     chunks= article_splitter.split_text(input_data_to_chunk)
-    chunks_dic = {item[:10]: item[10:].lstrip() for item in chunks}
+    def ajouter_espace_article(texte): return re.sub(r'(Article\s+\d+)\s*([^\d\s])', r'\1  \2', texte)
+    chunks=[ajouter_espace_article(i) for i in chunks]
+    chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
     return chunks_dic
 
 def chunker_2(input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".
-
+    # Attention résultats variables !
     Args:
         input_data_to_chunk: texte entrée a chunker apres conversion de pdf
 
@@ -39,7 +38,7 @@ def chunker_2(input_data_to_chunk: str) -> list:
 
 def chunker_3(chunks_UE_dict: dict, Directive_source:str):
     """
-    Dictionnaire d’articles en une liste d’objets Document avec métadonnées (Directive_source , N°article)
+    Dict d’articles -> liste objects Document avec métadonnées (Directive_source , N°article)
 
     Args:
         chunks_UE_dict (dict): Dictionnaire id sont articles et les clés contenus. 

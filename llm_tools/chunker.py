@@ -4,11 +4,12 @@ import re
 import numpy as np
 from langchain_core.documents import Document
 
-def chunker_1_v1(input_data_to_chunk: str ) -> list:
-    """Optimal chunker by article tested and approved on AML5 + CRR and DSP2.
-
+def chunker_1_step_1(input_data_to_chunk: str ) -> list:
+    """
+    ### Optimal chunker by article when using chunk_stat_token() 
+    
     Args:
-        input_data_to_chunk (_type_): texte entrée a chunker apres conversion de pdf
+        input_data_to_chunk (str): texte entrée a chunker apres conversion de pdf
 
     Returns:
         list: of chunks
@@ -20,49 +21,36 @@ def chunker_1_v1(input_data_to_chunk: str ) -> list:
     chunks_list= article_splitter.split_text(input_data_to_chunk)
     return chunks_list
 
-def chunker_1_v2(input_data_to_chunk: str ) -> dict:
-    """Optimal chunker by article tested and approved on AML5, CRR and DSP2.
-    Complete pipeline for chunks
-
+def chunker_1_step_2(beginning: int,end:int,chunks_dsp2_list:list) -> dict:
+    """Step2: 
+    ### Select beginning and end of a chunk + Add a space + Transform to dict
+    ### Optimal using chunk_stat_token() 
+    
     Args:
-        input_data_to_chunk (str): texte entrée a chunker apres conversion de pdf
+        beginning (int): _description_
+        end (int): _description_
+        chunks_dsp2_list (list): _description_
 
     Returns:
-        dict: of chunks
+        dict: output chunk totally cleaned and ready
     """
-    article_splitter = RecursiveCharacterTextSplitter(separators= ["Article"],chunk_size= 300, chunk_overlap=0)
-    chunks= article_splitter.split_text(input_data_to_chunk)
+    chunks_dsp2_list_1 = chunks_dsp2_list[beginning:end]
     def ajouter_espace_article(texte): return re.sub(r'(Article\s+\d+)\s*([^\d\s])', r'\1  \2', texte)
-    chunks=[ajouter_espace_article(i) for i in chunks]
-    chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
-    return chunks_dic
+    chunks_dsp2_list_2 = [ajouter_espace_article(i) for i in chunks_dsp2_list_1]
+    chunks_dsp2_dict = {i[:11].strip(): i[11:].strip() for i in chunks_dsp2_list_2}
+    return chunks_dsp2_dict
 
-def chunker_2(input_data_to_chunk: str) -> list:
-    """Chunker by "CHAPITRE", "SECTION", "Article".
-    # Attention résultats variables !
-    Args:
-        input_data_to_chunk: texte entrée a chunker apres conversion de pdf
-
-    Returns:
-        list: of chunks
+def chunker_1_step_3(chunks_UE_dict: dict, Directive_source:str):
     """
-    article_splitter = RecursiveCharacterTextSplitter(
-    separators= ["CHAPITRE", "SECTION", "Article"],
-    chunk_size= 100,
-    chunk_overlap=0),
-    chunks= article_splitter.split_text(input_data_to_chunk)
-    return chunks
-
-def chunker_3(chunks_UE_dict: dict, Directive_source:str):
-    """
-    Dict d’articles -> liste objects Document avec métadonnées (Directive_source , N°article)
+    ## Facultative
+    Dict : articles -> liste objects Document + métadonnées (Directive_source , N°article)
 
     Args:
         chunks_UE_dict (dict): Dictionnaire id sont articles et les clés contenus. 
         Directive_source (str): Nom ou référence de la directive UE. 
 
     Returns:
-        list: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
+        dict: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
     """
     documents = []
     for article_key, article_content in chunks_UE_dict.items():
@@ -73,6 +61,44 @@ def chunker_3(chunks_UE_dict: dict, Directive_source:str):
         )
         documents.append(doc)
     return documents
+
+def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
+    """All steps optimal article chunker. Tested on AML5, CRR and DSP2.
+
+    Args:
+        input_data_to_chunk (str): texte entrée a chunker apres conversion de pdf
+
+    Returns:
+        dict: of chunks
+    """
+    article_splitter = RecursiveCharacterTextSplitter(separators= ["Article"],chunk_size= 300, chunk_overlap=0)
+    chunks= article_splitter.split_text(input_data_to_chunk)
+    chunks = chunks[beginning:end]
+    def ajouter_espace_article(texte): return re.sub(r'(Article\s+\d+)\s*([^\d\s])', r'\1  \2', texte)
+    chunks=[ajouter_espace_article(i) for i in chunks]
+    chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
+    return chunks_dic
+
+def chunker_2(beginning: int, end:int, input_data_to_chunk: str) -> list:
+    """Chunker by "CHAPITRE", "SECTION", "Article".
+    ## Incomplete + non reliable
+    "SECTION" peut etre espacé...
+    Args:
+        input_data_to_chunk: texte entrée a chunker apres conversion de pdf
+
+    Returns:
+        list: of chunks
+    """
+    article_splitter = RecursiveCharacterTextSplitter(
+    separators= ["CHAPITRE", "SECTION", "Article"],
+    chunk_size= 100,
+    chunk_overlap=0)
+    chunks= article_splitter.split_text(input_data_to_chunk)
+    chunks = chunks[beginning:end]
+    def ajouter_espace_article(texte): return re.sub(r'(Article\s+\d+)\s*([^\d\s])', r'\1  \2', texte)
+    chunks=[ajouter_espace_article(i) for i in chunks]
+    return chunks
+
 
 
     

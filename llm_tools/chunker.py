@@ -81,10 +81,10 @@ def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
         documents.append(doc)
     return documents
 
-# Chunker 3 : approche qui définit un article par doc , chaque doc chunkés 
+# Chunker 3 : un article par doc puis chaque doc chunké 
 
 
-# Chunker 4 est une approche qui définit un chunk document pour chaque article
+# Chunker 4 : un chunk document pour chaque article
 
 def chunker_4(beginning: int, end:int, input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".

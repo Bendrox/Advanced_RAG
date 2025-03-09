@@ -4,8 +4,7 @@ from chromadb import PersistentClient
 from chromadb.config import Settings
 
 def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, chemin:str, chunk_version:str):
-    """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.
-    Fonction pour simple chunk par article  
+    """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.  
 
     Args:
         chunks_dict (dict): output of chunker_1_v1_step_2
@@ -21,19 +20,18 @@ def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, ch
         {"source": nom_source, "article": article_id}
         for article_id in chunks_dict.keys()
     ]
-    global chroma_db
-    chroma_db = Chroma.from_texts(
+    global chroma_db_art
+    chroma_db_art = Chroma.from_texts(
         texts=texts,
         metadatas=metadatas,
-        persist_directory=f"{chemin}_{nom_source}_{chunk_version}",
+        persist_directory=f"{chemin}/Vector_store_{nom_source}_{chunk_version}",
         embedding=embedding_model,
         collection_metadata = {
         "hnsw:space": "cosine",          
         "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
         "hnsw:M": 16   }             # Nbr de co par vecteur
     )
-    return chroma_db
-
+    return chroma_db_art
 
 def source_exists_in_chroma(chemin, source_name, embedding_model):
      """

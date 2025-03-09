@@ -4,6 +4,7 @@ import re
 import numpy as np
 from langchain_core.documents import Document
 
+# Chunker 1 : approche qui définit un chunk pour chaque article
 def chunker_1_step_1(input_data_to_chunk: str ) -> list:
     """
     ### Optimal chunker by article when using chunk_stat_token() 
@@ -57,7 +58,9 @@ def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
     chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
     return chunks_dic
 
-def chunker_doc(chunks_UE_dict: dict, Directive_source:str):
+# Chunker 2 : approche qui définit un chunk document pour chaque article
+
+def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
     """
     ## Option Facultative : dict -> list of docs + metadata
     
@@ -78,7 +81,12 @@ def chunker_doc(chunks_UE_dict: dict, Directive_source:str):
         documents.append(doc)
     return documents
 
-def chunker_2(beginning: int, end:int, input_data_to_chunk: str) -> list:
+# Chunker 3 : approche qui définit un article par doc , chaque doc chunkés 
+
+
+# Chunker 4 est une approche qui définit un chunk document pour chaque article
+
+def chunker_4(beginning: int, end:int, input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".
     ## Incomplete + non reliable
     "SECTION" peut etre espacé...

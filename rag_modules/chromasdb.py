@@ -3,12 +3,13 @@ import os
 from chromadb import PersistentClient
 from chromadb.config import Settings
 
-def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, chemin):
-    """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.  
+def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, chemin:str, chunk_version:str):
+    """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.
+    Fonction pour simple chunk par article  
 
     Args:
         chunks_dict (dict): output of chunker_1_v1_step_2
-        nom_source (str): exemple: nom de directive
+        nom_source (str): exemple: nom de directive UE
         embedding_model (AzureOpenAI): 
         chemin (str): local enregistre
 
@@ -24,7 +25,7 @@ def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, ch
     chroma_db = Chroma.from_texts(
         texts=texts,
         metadatas=metadatas,
-        persist_directory=chemin,
+        persist_directory=f"{chemin}_{nom_source}_{chunk_version}",
         embedding=embedding_model,
         collection_metadata = {
         "hnsw:space": "cosine",          
@@ -63,3 +64,13 @@ def load_existing_chromasdb(db_path, embedding_model):
         embedding_function=embedding_model
     )
     return chroma_db
+
+
+def print_res(results:list):
+    """Print output of similarity_search_with_relevance_scores
+
+    Args:
+        results (list of articles)
+    """
+    for doc, score in results:
+        print(f"\n *** Simil={score:.3f}, {doc.metadata} : {doc.page_content} ")

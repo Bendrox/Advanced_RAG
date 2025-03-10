@@ -35,9 +35,11 @@ chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/ch
 
 ### Choix utilisateur:
 # 1) Question RAG: 
+# Pour AML
 question_test_1="Est est l'objectif de la directive ?"
 question_test_2 = "modifications apportées à l'article visent principalement à élargir et clarifier le champ d'application des groupes concernés par les obligations de transmission d'informations, tout en maintenant les principes fondamentaux de secret professionnel et de protection des données."
 question= question_test_2 #choix question ici 
+
 
 # 2) Long context question ansering 
 lcqa="Non"  # "Oui" "Non"

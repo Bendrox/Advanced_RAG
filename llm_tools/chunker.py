@@ -65,7 +65,7 @@ def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
 
 # Chunker 2 : chaque article dans un chunk (format document avec metadonnées)
 
-def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
+def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str) -> dict:
     """
     ## Option Facultative : dict -> list of docs + metadata
     
@@ -74,7 +74,7 @@ def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
         Directive_source (str): Nom ou référence de la directive UE. 
 
     Returns:
-        dict: Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
+        dict of Document(id='1', metadata={'Directive_source': 'DPS2', 'N°article ': 'pre'}, page_content='mier Objet)
     """
     documents = []
     for article_key, article_content in chunks_UE_dict.items():
@@ -93,8 +93,8 @@ def chunker_3_all(spliter, documents:list):
     - En entrée de la liste `documents` en plusieurs sous-documents (chunks).
 
     Args:
-        documents (list): liste `documents` sorie de chunker_2_doc
-        spliter (method): choisir text_splitter_semantic_v2_prc, text_splitter_recursive_carac, text_splitter_semantic_v3_gdt
+    - Spliter (method): choisir text_splitter_semantic_v2_prc, text_splitter_recursive_carac, text_splitter_semantic_v3_gdt
+    - Documents (list): liste `documents` sorie de chunker_2_doc
 
     Returns:
         list: chunks
@@ -141,7 +141,7 @@ def chunker_4(beginning: int, end:int, input_data_to_chunk: str) -> list:
     chunks=[ajouter_espace_article(i) for i in chunks]
     return chunks
 
-def chunk_stat_token(your_chunks):
+def list_chunk_stat_token(your_chunks):
     """Produit des stats sur le nombre de tokens par chunks. 
     Pour but d'améliorer les performances 
 

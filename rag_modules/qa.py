@@ -43,8 +43,8 @@ def qa_vector_chromasdb_simil_score_normal(vector_chromasdb, question, k_numer ,
                                                             filter={"source":source_filter})
     for doc, score in results:
         print(f"\n *[SIM={score:.3f}] {doc.page_content} [{doc.metadata}]")
- 
- def qa_llm_vectordb_chroma(vectordb_name,question,k):
+        
+def qa_llm_vectordb_chroma(vectordb_name,question,k):
     """
     Exécute une requête question/réponse en utilisant :
     - une base vectorielle (type Chroma) pour retrouver les documents pertinents,

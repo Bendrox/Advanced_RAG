@@ -1,12 +1,12 @@
 # Importing data pipelines
-from data_pipelines.url_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
+from data_pipelines.firecrawl_extractor import url_to_local_pdf, firecrawl_extractor_mrkd
 from data_pipelines.token_counter import count_tokens
-from data_pipelines.txt_saver_loader import load_txt
-from data_pipelines.data_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
+from data_pipelines.saver_loader import load_txt
+from data_pipelines.firecrawl_pipe_cleaning import (supr_avant_directive_mrk, supr_apres_directive_mrk, 
                                           nettoyer_markdown, weird_carac_remove, 
                                           supr_avant_reglement_mrk, supr_apres_reglement_mrk)
 
-from data_pipelines.txt_saver_loader import load_txt, save_txt, save_dict_json
+from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing LLM
 from llm_tools.chunker import chunker_optimal, chunks_list_to_dict

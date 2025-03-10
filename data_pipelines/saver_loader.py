@@ -24,7 +24,7 @@ def save_txt(filepath: str, text: str):
         fichier.write(text)
 
 def save_dict_json(filepath: str, dict: dict):
-    """sauvgarde un fichier dict en json dans un fichier local.
+    """sauvgarde un fichier dict (chunks) en json dans un fichier local.
 
     Args:
         filepath (str): chemin sauvarde du fichier json

@@ -7,7 +7,9 @@ from data_pipelines.token_counter import str_count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing for LLM
-from llm_tools.chunker import chunker_1 ,chunker_1_pipe,chunker_2,chunker_3, chunker_3_pipe, chunk_stat_token
+from llm_tools.chunker import (chunker_1_step_1,chunker_1_step_2 
+                               ,chunker_1_all,chunker_2_doc,
+                               chunker_3_all, chunker_4, list_chunk_stat_token)
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
 from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
 
@@ -45,14 +47,14 @@ question= question_test_2 #choix question ici
 lcqa="Non"  # "Oui" "Non"
 
 # 3) Contenu UE: réglement / directive: 
-url_ue= url_dsp2_pdf # ici choix 
-source_name = "dsp2" # "aml_5" "dsp2"
+url_ue= url_aml_5_pdf # ici choix 
+source_name = "aml_5" # "aml_5" "dsp2"
 
 # 4) Chunk strategies:
 chunk_stratégie=1 # 1 chaque article dans un chunk
                   # 2 chaque article dans un chunk (format document avec metadonnées)
                   # 3 Double chunk : 1 article dans 1 chunk (doc + meta) rechunké
-                  # 4 chaque article ds doc + structure Chapitre sec...
+                  # Not use 4 chaque article ds doc + structure Chapitre sec...
 
 nbr_art=70 # nombre d'articles pour chunck
 
@@ -122,31 +124,22 @@ print("Début de l'étape 6.1: Chunking\n")
 
 # Modular 3 cases
 if chunk_stratégie == 1:
-    chunks=chunker_1(scrape_result_clean)
+    chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
 elif chunk_stratégie == 2:
-    chunks=chunker_2(scrape_result_clean)
+    chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
+    chunks=chunker_2_doc(chunks, source_name)
 else:
-    chunks=chunker_3(scrape_result_clean)
-    
-chunks= chunks[1:nbr_art]
-print(f"Statistiques sur les chunks créés:")
-print(f"{chunk_stat_token(chunks)}")
+    chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
+    chunks=chunker_2_doc(chunks, source_name)
+    chunks=chunker_3_all(scrape_result_clean)
+
 print("Fin de l'étape 6.1: Chunking")
 print("---------------------------------------")
 
 # étape 6.2: list to dict 
-print("Début de l'étape 6.2: List to dict")
-
-if chunk_stratégie == 1:
-    chunks_dic=chunker_1_pipe(scrape_result_clean)
-elif chunk_stratégie == 2:
-    chunks_dic=chunker_2(scrape_result_clean)
-else:
-    chunks_dic=chunker_3_pipe(scrape_result_clean)
-    
-    
+print("Début de l'étape 6.2: Save chunks")
 save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}_strat_{chunk_stratégie}.json", chunks)
-print("Fin de l'étape 6.2: List to dict")
+print("Fin de l'étape 6.2: Save chunks")
 print("---------------------------------------")
 
 # étape 6.3: embedding + stockage chromasdb
@@ -161,7 +154,7 @@ if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
 
 else:
     print('Données non existentes dans ChromasDB, chargement en cours...') 
-    vector_chromasdb = input_data_chromasdb(chunks_dic, 
+    vector_chromasdb = input_data_chromasdb(chunks, 
                                             source_name, 
                                             emb_3_large, 
                                                     "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")

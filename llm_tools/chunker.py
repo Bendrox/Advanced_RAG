@@ -3,6 +3,7 @@ from data_pipelines.token_counter import count_tokens
 import re
 import numpy as np
 from langchain_core.documents import Document
+from langchain_chroma import Chroma
 
 # Chunker 1 : approche qui définit un chunk pour chaque article
 def chunker_1_step_1(input_data_to_chunk: str ) -> list:
@@ -82,9 +83,38 @@ def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
     return documents
 
 # Chunker 3 : un article par doc puis chaque doc chunké 
+def chunker_3_all(spliter, documents:list):
+    """
+    - Chunk le contenu de chaque doc (1 article)
+    - En entrée de la liste `documents` en plusieurs sous-documents (chunks).
 
+    Args:
+        documents (list): liste `documents`
 
-# Chunker 4 : un chunk document pour chaque article
+    Returns:
+        list: chunks
+    """
+    
+    chunked_docs = []
+    for doc in documents:
+        # Récupérer le texte d'origine
+        original_text = doc.page_content
+
+        # Découper en plusieurs segments (chunks)
+        chunks = spliter.split_text(original_text)
+
+        # Construire la liste des nouveaux Documents en conservant les metadata
+        for chunk in chunks:
+            new_doc = Document(
+                page_content=chunk,
+                metadata=doc.metadata,  # On recopie les métadonnées du Document source
+                id=len(chunked_docs) + 1
+            )
+            chunked_docs.append(new_doc)
+
+    return chunked_docs
+
+# Chunker 4 : un chunk document avec structure Chapitre sec
 
 def chunker_4(beginning: int, end:int, input_data_to_chunk: str) -> list:
     """Chunker by "CHAPITRE", "SECTION", "Article".

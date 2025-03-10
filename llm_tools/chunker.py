@@ -1,11 +1,15 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from data_pipelines.token_counter import count_tokens
+from llm_tools.spliters import (text_splitter_semantic_v2_prc,
+text_splitter_recursive_carac,
+text_splitter_semantic_v3_gdt)
+
 import re
 import numpy as np
 from langchain_core.documents import Document
 from langchain_chroma import Chroma
 
-# Chunker 1 : approche qui définit un chunk pour chaque article
+# Chunker 1 :  chaque article dans un chunk
 def chunker_1_step_1(input_data_to_chunk: str ) -> list:
     """
     ### Optimal chunker by article when using chunk_stat_token() 
@@ -59,7 +63,7 @@ def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
     chunks_dic = {item[:11].strip(): item[10:].lstrip() for item in chunks}
     return chunks_dic
 
-# Chunker 2 : approche qui définit un chunk document pour chaque article
+# Chunker 2 : chaque article dans un chunk (format document avec metadonnées)
 
 def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
     """
@@ -82,14 +86,15 @@ def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str):
         documents.append(doc)
     return documents
 
-# Chunker 3 : un article par doc puis chaque doc chunké 
+# Chunker 3 : 2 couches de chunk : 1 article dans 1 chunk (doc + meta) rechunké
 def chunker_3_all(spliter, documents:list):
     """
     - Chunk le contenu de chaque doc (1 article)
     - En entrée de la liste `documents` en plusieurs sous-documents (chunks).
 
     Args:
-        documents (list): liste `documents`
+        documents (list): liste `documents` sorie de chunker_2_doc
+        spliter (method): pour 
 
     Returns:
         list: chunks

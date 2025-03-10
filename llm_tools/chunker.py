@@ -94,7 +94,7 @@ def chunker_3_all(spliter, documents:list):
 
     Args:
         documents (list): liste `documents` sorie de chunker_2_doc
-        spliter (method): pour 
+        spliter (method): choisir text_splitter_semantic_v2_prc, text_splitter_recursive_carac, text_splitter_semantic_v3_gdt
 
     Returns:
         list: chunks

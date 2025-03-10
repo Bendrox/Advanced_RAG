@@ -3,7 +3,7 @@ import os
 
 # Importing data pipelines
 from data_pipelines.optim_data_pip import pipe_1_url_to_pdf, pipe_2_pdf_txt, pipe_3_nettoyer_texte
-from data_pipelines.token_counter import count_tokens
+from data_pipelines.token_counter import str_count_tokens
 from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
 
 ## importing for LLM
@@ -35,21 +35,25 @@ chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/ch
 
 ### Choix utilisateur:
 # 1) Question RAG: 
+# Pour AML
 question_test_1="Est est l'objectif de la directive ?"
 question_test_2 = "modifications apportées à l'article visent principalement à élargir et clarifier le champ d'application des groupes concernés par les obligations de transmission d'informations, tout en maintenant les principes fondamentaux de secret professionnel et de protection des données."
 question= question_test_2 #choix question ici 
+
 
 # 2) Long context question ansering 
 lcqa="Non"  # "Oui" "Non"
 
 # 3) Contenu UE: réglement / directive: 
-url_ue= url_aml_5_pdf # ici choix aml5
-source_name = "aml_5" # "aml_5"
+url_ue= url_dsp2_pdf # ici choix 
+source_name = "dsp2" # "aml_5" "dsp2"
 
 # 4) Chunk strategies:
-chunk_stratégie=1 # 1 pour articles, 
-                  # 2 pour chapitre/ selection/ article
-                  # 3 + alinéa
+chunk_stratégie=1 # 1 chaque article dans un chunk
+                  # 2 chaque article dans un chunk (format document avec metadonnées)
+                  # 3 Double chunk : 1 article dans 1 chunk (doc + meta) rechunké
+                  # 4 chaque article ds doc + structure Chapitre sec...
+
 nbr_art=70 # nombre d'articles pour chunck
 
 print("Etape 1 terminée")
@@ -74,7 +78,7 @@ print("---------------------------------------")
 
 ###### Step 3: calcul nombre de token de l'extraction brute 
 print("Début de l'étape 3: calcul du nombre de token de l'extraction brute")
-print(f"Le nombre de count_tokens du texte brute est de : {count_tokens(scrape_result)}")
+print(f"Le nombre de count_tokens du texte brute est de : {str_count_tokens(scrape_result)}")
 print("Etape 3 terminée")
 print("---------------------------------------")
 
@@ -83,8 +87,8 @@ print("Début de l'étape 4: Netoyage du text brut ")
 scrape_result_clean = pipe_3_nettoyer_texte(scrape_result)
 
 print("Succès de l'étape 4: Netoyage du text brut ")
-print(f"Nombre de token après nettoyage du text: {count_tokens(scrape_result_clean)}")
-diff_nettoyage= count_tokens(scrape_result) - count_tokens(scrape_result_clean)
+print(f"Nombre de token après nettoyage du text: {str_count_tokens(scrape_result_clean)}")
+diff_nettoyage= str_count_tokens(scrape_result) - str_count_tokens(scrape_result_clean)
 print(f"Nombre de token supprimés grace au nettoyage : {diff_nettoyage}  ")
 print("---------------------------------------")
 

@@ -26,6 +26,14 @@ def pipe_2_pdf_txt(pdf_path) -> str:
 
 # step 3: txt -> clean txt
 def pipe_3_nettoyer_texte(texte) -> str:
+    """#### Supprime caractères de coupure, retours à la ligne, backslash...
+
+    Args:
+        texte (str): brute
+
+    Returns:
+        str: clean
+    """
     # 1. Supprime les caractères de coupure de mot suivis de retour à la ligne
     texte = re.sub(r'\xad\n', '', texte)
 

@@ -15,7 +15,7 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 
 #importing for RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import source_exists_in_chroma, load_existing_chromasdb, input_chunks_chromasdb
+from rag_modules.chromasdb import source_exists_in_chroma, check_source_in_chroma_v2,load_existing_chromasdb, input_chunks_chromasdb
 from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
                             qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal)
 
@@ -33,13 +33,13 @@ url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:320
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
 url_dsp2_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L2366"
 
-chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/"
 
 ### Choix utilisateur:
 # 1) Question RAG: 
 # Pour AML
 question_test_1="Est est l'objectif de la directive ?"
-question_test_2 = "modifications apportées à l'article visent principalement à élargir et clarifier le champ d'application des groupes concernés par les obligations de transmission d'informations, tout en maintenant les principes fondamentaux de secret professionnel et de protection des données."
+question_test_2 = "Dans quels cas la directive AML 5 impose-t-elle une mesure de vigilance renforcée (« enhanced due diligence ») ?"
 question= question_test_2 #choix question ici 
 
 
@@ -136,7 +136,8 @@ else:
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
     chunks=chunker_2_doc(chunks, source_name)
     chunks=chunker_3_all(scrape_result_clean)
-
+    
+print("Strategie de chunking choisie: {chunk_stratégie}")
 print("Fin de l'étape 6.1: Chunking")
 print("---------------------------------------")
 
@@ -155,13 +156,14 @@ print("Début de l'étape 6.3: Chunks embedding to vector database")
 # 3 stratégies de chunks en collection_name
 # nom de la directive en metadonnées paramètre source 
 
-if source_exists_in_chroma(chroma_db_path,chunk_stratégie, source_name ,emb_model_name,embedding_model):
+if check_source_in_chroma_v2(chroma_db_path,chunk_stratégie, source_name ,emb_model_name,embedding_model):
     print('Données existentes dans ChromasDB') 
     global chromasdb
-    chromasdb = load_existing_chromasdb(chroma_db_path, emb_model_name)
-
+    chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
+    
+    
 else:
-    print('Données non existentes dans ChromasDB, chargement en cours...') 
+    print('Données non existentes dans ChromasDB, chargement en cours dans la base vectorielle...') 
     if chunk_stratégie == 1: # dict input
         chromasdb = input_chunks_chromasdb(chunks, 
                                             source_name, 
@@ -169,7 +171,8 @@ else:
                                             emb_model_name,
         "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb",
                                             1)
-        print("Number of chunks output from Strategy 1:", chromasdb._collection.count())        
+        print("Nombre de vecteurs de stratégie 1:", chromasdb._collection.count()) 
+        chromasdb.similarity_search_with_relevance_scores("", 5)       
 
     else: 
         chromasdb.add_documents(chunks)
@@ -179,20 +182,13 @@ print("Fin de l'étape 6.3: Chunks embedding to vector database, ")
 print("---------------------------------------")
 
 # étape 6.4: QA retreival test:
-print("Début de l'étape 6.4: Question test article retreival")
-
-
-res_qa_retreival= qa_vector_chromasdb(chromasdb, question , 4, "aml_5")
+print("Début de l'étape 6.4: QA article retreival similarity score")
 
 print(f"\nQuestion de l'utilisateur: {question}")
 print(f"\nRetreival result:\n")
-for res in res_qa_retreival:
-    print(f"*** {res.page_content} [{res.metadata}]\n")
-    
-res_qa_retreival_str=str(res_qa_retreival)
-save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/qa_response.txt",
-         res_qa_retreival_str)
-print("Fin de l'étape 6.4: Question test article retreival")
+qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
+# intégrer pprint
+print("\nFin de l'étape 6.4: QA article retreival similarity score")
 print("---------------------------------------")
 
 # étape 6.5: QA retreival + llm test:
@@ -206,10 +202,7 @@ save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.tx
 print("\nFin de l'étape 6.5: QA article retreival + llm ")
 print("---------------------------------------")
 
-# Etape 6.6 : similarity retreival :
-print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
-qa_vector_chromasdb_simil_score_normal(chromasdb,question,3,source_name)
-print("\nFin de l'étape 6.6: QA article retreival similarity score ")
+# Etape 6.6 : 
 
 # Etape 6.7: Reranking :
 

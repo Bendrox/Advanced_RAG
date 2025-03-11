@@ -1,4 +1,5 @@
 from models.llm_models import llm_4omini
+from pprint import pprint
 
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
@@ -29,11 +30,10 @@ def qa_vector_chromasdb_simil_score(vector_chromasdb, question, k_numer ,source_
     results = vector_chromasdb.similarity_search_with_score(query=question,
                                                             k=k_numer,
                                                             filter={"source":source_filter})
-    for doc, score in results:
-        print(f"\n *[SIM={score:3f}] {doc.page_content} [{doc.metadata}]")
+    return results
 
 
-def qa_vector_chromasdb_simil_score_normal(vector_chromasdb, question, k_numer ,source_filter):
+def qa_vector_chromasdb_simil_score_normal(vector_chromasdb, question:str, k_numer :int,source_filter:str):
     """ 
     1 : Indique une correspondance parfaite.
     0 : Une absence de similarité.
@@ -41,8 +41,9 @@ def qa_vector_chromasdb_simil_score_normal(vector_chromasdb, question, k_numer ,
     results = vector_chromasdb.similarity_search_with_relevance_scores(query=question,
                                                             k=k_numer,
                                                             filter={"source":source_filter})
+    #return pprint(results)
     for doc, score in results:
-        print(f"\n *[SIM={score:.3f}] {doc.page_content} [{doc.metadata}]")
+        print(f"\n * SIM={score:.3f} ,{vector_chromasdb._collection_name} ,metadata: {doc.metadata} : {doc.page_content} ")
         
 def qa_llm_vectordb_chroma(vectordb_name,question,k):
     """

@@ -1,5 +1,5 @@
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from data_pipelines.token_counter import count_tokens
+from data_pipelines.token_counter import str_count_tokens
 from llm_tools.spliters import (text_splitter_semantic_v2_prc,
 text_splitter_recursive_carac,
 text_splitter_semantic_v3_gdt)
@@ -147,7 +147,7 @@ def list_chunk_stat_token(your_chunks):
 
     Args:your_chunks
     """
-    chunk_lengths = [count_tokens(chunk) for chunk in your_chunks]
+    chunk_lengths = [str_count_tokens(chunk) for chunk in your_chunks]
     print("Nombre de chunks:", len(chunk_lengths))
     print("Nombre de token des chunks:", chunk_lengths)
     print("Nombre de token moyen par chunk :", np.mean(chunk_lengths))

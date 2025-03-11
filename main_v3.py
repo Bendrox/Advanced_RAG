@@ -15,7 +15,7 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 
 #importing for RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import input_data_chromasdb, source_exists_in_chroma, load_existing_chromasdb
+from rag_modules.chromasdb import source_exists_in_chroma, load_existing_chromasdb, input_chunks_chromasdb
 from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
                             qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal)
 
@@ -33,7 +33,7 @@ url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:320
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
 url_dsp2_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L2366"
 
-chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/Vector_stores/chromasdb"
 
 ### Choix utilisateur:
 # 1) Question RAG: 
@@ -57,6 +57,9 @@ chunk_stratégie=1 # 1 chaque article dans un chunk
                   # Not use 4 chaque article ds doc + structure Chapitre sec...
 
 nbr_art=70 # nombre d'articles pour chunck
+
+# 5) embedding model :
+embedding_model= emb_3_large
 
 print("Etape 1 terminée")
 print("---------------------------------------")
@@ -142,32 +145,38 @@ save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chun
 print("Fin de l'étape 6.2: Save chunks")
 print("---------------------------------------")
 
-# étape 6.3: embedding + stockage chromasdb
-# Essayer Milvus , FAISS
+# étape 6.3: Embedding + stockage chromasdb
+# Essayer Milvus , FAISS, picorn ?
 
-print("Début de l'étape 6.3: Chunks to vector database")
+print("Début de l'étape 6.3: Chunks embedding to vector database")
 
-if source_exists_in_chroma(chroma_db_path, source_name ,emb_3_large):
+# 1 seul chromasDB
+# 3 stratégies de chunks en collection_name
+# nom de la directive en metadonnées paramètre source 
+
+if source_exists_in_chroma(chroma_db_path,chunk_stratégie, source_name ,embedding_model):
     print('Données existentes dans ChromasDB') 
-    global vector_chromasdb
-    vector_chromasdb = load_existing_chromasdb(chroma_db_path, emb_3_large)
+    global chromasdb
+    chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
 
 else:
     print('Données non existentes dans ChromasDB, chargement en cours...') 
-    vector_chromasdb = input_data_chromasdb(chunks, 
+    if chunk_stratégie == 1: # dict input
+        chromasdb = input_chunks_chromasdb(chunks, 
                                             source_name, 
-                                            emb_3_large, 
-                                                    "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb")
-    print(vector_chromasdb._collection.count())        
+                                            embedding_model, 
+        "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb",1)
     
-print("Fin de l'étape 6.3: Chunks to vector database, ")
+    print("Number of chunks output from Strategy 1:", chromasdb._collection.count())        
+    
+print("Fin de l'étape 6.3: Chunks embedding to vector database, ")
 print("---------------------------------------")
 
 # étape 6.4: QA retreival test:
 print("Début de l'étape 6.4: Question test article retreival")
 
 
-res_qa_retreival= qa_vector_chromasdb(vector_chromasdb ,question , 4, "aml_5")
+res_qa_retreival= qa_vector_chromasdb(chromasdb ,question , 4, "aml_5")
 
 print(f"\nQuestion de l'utilisateur: {question}")
 print(f"\nRetreival result:\n")
@@ -183,7 +192,7 @@ print("---------------------------------------")
 # étape 6.5: QA retreival + llm test:
 print("Début de l'étape 6.5: QA article retreival + llm \n")
 
-res_rag_1 = qa_llm_vectordb_chroma(vector_chromasdb,question,3)
+res_rag_1 = qa_llm_vectordb_chroma(chromasdb,question,3)
 print(res_rag_1['answer'])
 res_rag_1_str = str(res_rag_1['answer'])
 save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/rag1.txt",res_rag_1_str)
@@ -193,7 +202,7 @@ print("---------------------------------------")
 
 # Etape 6.6 : similarity retreival :
 print("\nDébut de l'étape 6.6: QA article retreival similarity score ")
-qa_vector_chromasdb_simil_score_normal(vector_chromasdb,question,3,source_name)
+qa_vector_chromasdb_simil_score_normal(chromasdb,question,3,source_name)
 print("\nFin de l'étape 6.6: QA article retreival similarity score ")
 
 # Etape 6.7: Reranking :

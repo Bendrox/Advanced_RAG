@@ -33,7 +33,7 @@ def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, ch
     )
     return chroma_db_art
 
-def source_exists_in_chroma(chemin, source_name, embedding_model):
+def source_exists_in_chroma(chemin, chunk_stratégie, source_name, embedding_model):
      """
      Vérifie si une source donnée existe déjà dans la base Chroma persistée.
      Args:
@@ -47,10 +47,11 @@ def source_exists_in_chroma(chemin, source_name, embedding_model):
      # Charge la base Chroma existante
      chroma_db = Chroma(
          persist_directory=chemin,
+         collection_name= f"Chunk_strat_{chunk_stratégie}_{embedding_model}" , 
          embedding_function=embedding_model)
  
      retriever = chroma_db.as_retriever()
-     docs = retriever.invoke("tsst", filter={"source": source_name})
+     docs = retriever.invoke("test", filter={"source": source_name})
  
      return len(docs) > 0
  

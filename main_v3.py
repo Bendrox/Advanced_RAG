@@ -15,7 +15,8 @@ from models.llm_models import llm_4o, llm_4omini, llm_stream_response
 
 #importing for RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l
-from rag_modules.chromasdb import source_exists_in_chroma, check_source_in_chroma_v2,load_existing_chromasdb, input_chunks_chromasdb
+from rag_modules.chromasdb import (source_exists_in_chroma, load_existing_chromasdb, 
+        input_chunks_chromasdb, input_chunks_chromasdb_v2, source_exists_in_chroma_v2)
 from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
                             qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal)
 
@@ -48,7 +49,7 @@ lcqa="Non"  # "Oui" "Non"
 
 # 3) Contenu UE: réglement / directive: 
 url_ue= url_aml_5_pdf # ici choix 
-source_name = "aml_5" # "aml_5" "dsp2"
+source_name="aml_5" # "aml_5" "dsp2"
 
 # 4) Chunk strategies:
 chunk_stratégie=1 # 1 chaque article dans un chunk
@@ -156,7 +157,7 @@ print("Début de l'étape 6.3: Chunks embedding to vector database")
 # 3 stratégies de chunks en collection_name
 # nom de la directive en metadonnées paramètre source 
 
-if check_source_in_chroma_v2(chroma_db_path,chunk_stratégie, source_name ,emb_model_name,embedding_model):
+if source_exists_in_chroma_v2(chroma_db_path,chunk_stratégie, source_name ,emb_model_name,embedding_model):
     print('Données existentes dans ChromasDB') 
     global chromasdb
     chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
@@ -165,7 +166,7 @@ if check_source_in_chroma_v2(chroma_db_path,chunk_stratégie, source_name ,emb_m
 else:
     print('Données non existentes dans ChromasDB, chargement en cours dans la base vectorielle...') 
     if chunk_stratégie == 1: # dict input
-        chromasdb = input_chunks_chromasdb(chunks, 
+        chromasdb = input_chunks_chromasdb_v2(chunks, 
                                             source_name, 
                                             embedding_model, 
                                             emb_model_name,

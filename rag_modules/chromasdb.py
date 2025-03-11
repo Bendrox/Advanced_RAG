@@ -3,7 +3,7 @@ import os
 from chromadb import PersistentClient
 from chromadb.config import Settings
 
-def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, chemin:str, chunk_version:str):
+def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, emb_model_name :str,chroma_db_path:str, chunk_strat:str):
     """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.  
 
     Args:
@@ -24,8 +24,10 @@ def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, ch
     chroma_db_art = Chroma.from_texts(
         texts=texts,
         metadatas=metadatas,
-        persist_directory=f"{chemin}/Vector_store_{nom_source}_{chunk_version}",
+        # old version: persist_directory=f"{chemin}/Vector_store_{nom_source}_{chunk_strat}",
+        persist_directory= chroma_db_path,
         embedding=embedding_model,
+        collection_name= f"Chunk_strat_{chunk_strat}_{emb_model_name}",
         collection_metadata = {
         "hnsw:space": "cosine",          
         "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
@@ -33,7 +35,7 @@ def input_chunks_chromasdb(chunks_dict:dict, nom_source:str, embedding_model, ch
     )
     return chroma_db_art
 
-def source_exists_in_chroma(chemin, chunk_stratégie, source_name, embedding_model):
+def source_exists_in_chroma(chemin, chunk_stratégie, source_name, emb_model_name, embedding_model):
      """
      Vérifie si une source donnée existe déjà dans la base Chroma persistée.
      Args:
@@ -47,7 +49,7 @@ def source_exists_in_chroma(chemin, chunk_stratégie, source_name, embedding_mod
      # Charge la base Chroma existante
      chroma_db = Chroma(
          persist_directory=chemin,
-         collection_name= f"Chunk_strat_{chunk_stratégie}_{embedding_model}" , 
+         collection_name= f"Chunk_strat_{chunk_stratégie}_{emb_model_name}" , 
          embedding_function=embedding_model)
  
      retriever = chroma_db.as_retriever()
@@ -55,7 +57,6 @@ def source_exists_in_chroma(chemin, chunk_stratégie, source_name, embedding_mod
  
      return len(docs) > 0
  
-
 
 def load_existing_chromasdb(db_path, embedding_model):
     chroma_db = Chroma(

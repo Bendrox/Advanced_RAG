@@ -33,7 +33,7 @@ url_aml_5_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:320
 url_crr_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32013R0575"
 url_dsp2_pdf="https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32015L2366"
 
-chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/Vector_stores/chromasdb"
+chroma_db_path = "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb"
 
 ### Choix utilisateur:
 # 1) Question RAG: 
@@ -60,6 +60,7 @@ nbr_art=70 # nombre d'articles pour chunck
 
 # 5) embedding model :
 embedding_model= emb_3_large
+emb_model_name = embedding_model.model_dump()["model"]
 
 print("Etape 1 terminée")
 print("---------------------------------------")
@@ -149,15 +150,15 @@ print("---------------------------------------")
 # Essayer Milvus , FAISS, picorn ?
 
 print("Début de l'étape 6.3: Chunks embedding to vector database")
-
+### Resultat recherché: 
 # 1 seul chromasDB
 # 3 stratégies de chunks en collection_name
 # nom de la directive en metadonnées paramètre source 
 
-if source_exists_in_chroma(chroma_db_path,chunk_stratégie, source_name ,embedding_model):
+if source_exists_in_chroma(chroma_db_path,chunk_stratégie, source_name ,emb_model_name,embedding_model):
     print('Données existentes dans ChromasDB') 
     global chromasdb
-    chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
+    chromasdb = load_existing_chromasdb(chroma_db_path, emb_model_name)
 
 else:
     print('Données non existentes dans ChromasDB, chargement en cours...') 
@@ -165,9 +166,14 @@ else:
         chromasdb = input_chunks_chromasdb(chunks, 
                                             source_name, 
                                             embedding_model, 
-        "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb",1)
-    
-    print("Number of chunks output from Strategy 1:", chromasdb._collection.count())        
+                                            emb_model_name,
+        "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb",
+                                            1)
+        print("Number of chunks output from Strategy 1:", chromasdb._collection.count())        
+
+    else: 
+        chromasdb.add_documents(chunks)
+        
     
 print("Fin de l'étape 6.3: Chunks embedding to vector database, ")
 print("---------------------------------------")
@@ -176,7 +182,7 @@ print("---------------------------------------")
 print("Début de l'étape 6.4: Question test article retreival")
 
 
-res_qa_retreival= qa_vector_chromasdb(chromasdb ,question , 4, "aml_5")
+res_qa_retreival= qa_vector_chromasdb(chromasdb, question , 4, "aml_5")
 
 print(f"\nQuestion de l'utilisateur: {question}")
 print(f"\nRetreival result:\n")

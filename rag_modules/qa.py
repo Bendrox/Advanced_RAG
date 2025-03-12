@@ -43,7 +43,26 @@ def qa_vector_chromasdb_simil_score_normal(vector_chromasdb, question:str, k_num
                                                             filter={"source":source_filter})
     #return pprint(results)
     for doc, score in results:
-        print(f"\n * SIM={score:.3f} ,{vector_chromasdb._collection_name} ,metadata: {doc.metadata} : {doc.page_content} ")
+        print(f"\n * SIM={score:.3f} ,metadata: {doc.metadata} : {doc.page_content} ")
+
+
+def qa_vector_chromasdb_simil_score_normal_v2(vector_chromasdb, question:str, k_numer :int, 
+                                              source_name:str, emb_model_name:str, num_chunk_strat:int):
+    """ 
+    1 : Indique une correspondance parfaite.
+    0 : Une absence de similarité.
+    """
+    results = vector_chromasdb.similarity_search_with_relevance_scores(query=question,
+                                                            k=k_numer,
+                                                            filter={
+        "$and": [ {"source": source_name}, 
+                 {"Embeding_model": emb_model_name},
+                 {"Chunk_strat": num_chunk_strat} ]
+    })
+    #return pprint(results)
+    for doc, score in results:
+        print(f"\n * SIM={score:.3f} ,metadata: {doc.metadata} : {doc.page_content} ")
+        
         
 def qa_llm_vectordb_chroma(vectordb_name,question,k):
     """

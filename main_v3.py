@@ -18,7 +18,8 @@ from models.embedding_models import emb_3_large, funct_embedding_openai_3l
 from rag_modules.chromasdb import (source_exists_in_chroma, load_existing_chromasdb, 
         input_chunks_chromasdb, input_chunks_chromasdb_v2, source_exists_in_chroma_v3)
 from rag_modules.qa import (qa_llm_vectordb_chroma, qa_vector_chromasdb, 
-                            qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal)
+                            qa_vector_chromasdb_simil_score, qa_vector_chromasdb_simil_score_normal,
+                            qa_vector_chromasdb_simil_score_normal_v2)
 
 
 # Langchain 
@@ -108,8 +109,8 @@ art_1_new = load_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_input/
 # Inject data for QA 
 
 if lcqa == "Oui": 
-    lcqa_3p_res=get_eu_data_3p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
-    lcqa_4p_res=get_eu_data_4p(llm_4o,scrape_result_clean, art_1_old, art_1_new)
+    lcqa_3p_res=get_eu_data_3p(llm_41_mini,scrape_result_clean, art_1_old, art_1_new)
+    lcqa_4p_res=get_eu_data_4p(llm_41_mini,scrape_result_clean, art_1_old, art_1_new)
     # save llm response 
     save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_3p.txt",lcqa_3p_res)
     save_txt("/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_llm_output/llm_rep_4p.txt",lcqa_4p_res)
@@ -162,7 +163,7 @@ print("Début de l'étape 6.3: Chunks embedding to vector database")
 # 3 stratégies de chunks en collection_name
 # nom de la directive en metadonnées paramètre source 
 
-if source_exists_in_chroma_v3(chroma_db_path, source_name ,embedding_model,emb_model_name,1):
+if source_exists_in_chroma_v3(chroma_db_path, source_name ,embedding_model,emb_model_name,chunk_stratégie):
     print('Données existentes dans ChromasDB') 
     global chromasdb
     chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
@@ -199,7 +200,8 @@ print("Début de l'étape 6.4: QA article retreival similarity score")
 
 print(f"\nQuestion de l'utilisateur: {question}")
 print(f"\nRetreival result:\n")
-qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
+#qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
+qa_vector_chromasdb_simil_score_normal_v2(chromasdb,question,4,'aml_5', 'text-embedding-3-large', chunk_stratégie)
 # intégrer pprint
 print("\nFin de l'étape 6.4: QA article retreival similarity score")
 print("---------------------------------------")

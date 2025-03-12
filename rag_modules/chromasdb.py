@@ -110,7 +110,13 @@ def source_exists_in_chroma_v2(chemin:str, chunk_strat, source_name, emb_model_n
          embedding_function=embedding_model)
  
      retriever = chroma_db.as_retriever()
-     docs = retriever.invoke("test", filter={"source": source_name,"Chunk_strat":chunk_strat, "Embeding_model":emb_model_name })
+     docs = retriever.invoke("test", filter={
+        "$and": [
+            {"source": source_name},
+            {"Chunk_strat": chunk_strat},
+            {"Embeding_model": emb_model_name}
+        ]
+    })
  
      return len(docs) > 0
 

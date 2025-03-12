@@ -36,3 +36,22 @@ def save_dict_json(filepath: str, dict: dict):
                 fichier, 
                 ensure_ascii=False,# garde les accents/caractères spéciaux lisibles
                 indent=4) # rend le fichier lisible avec une bonne indentation
+        
+        
+import json
+
+def save_doc_json(filepath: str, dict_obj: dict):
+    """Sauvegarde un chunk document en JSON après conversion des objets non sérialisables.
+
+    Args:
+        filepath (str): chemin de sauvegarde du fichier json
+        dict_obj (dict): dictionnaire à sauvegarder
+    """
+    def convert(obj):
+        # si l'objet est un Document, on le convertit en dictionnaire
+        if hasattr(obj, '__dict__'):
+            return obj.__dict__
+        return str(obj)  # fallback pour tout autre type non sérialisable
+
+    with open(filepath, "w", encoding="utf-8") as fichier:
+        json.dump(dict_obj, fichier, ensure_ascii=False, indent=4, default=convert)

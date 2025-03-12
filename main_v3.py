@@ -4,7 +4,7 @@ import os
 # Importing data pipelines
 from data_pipelines.optim_data_pip import pipe_1_url_to_pdf, pipe_2_pdf_txt, pipe_3_nettoyer_texte
 from data_pipelines.token_counter import str_count_tokens
-from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json
+from data_pipelines.saver_loader import load_txt, save_txt, save_dict_json, save_doc_json
 
 ## importing for LLM
 from llm_tools.chunker import (chunker_1_step_1,chunker_1_step_2 
@@ -52,10 +52,9 @@ url_ue= url_aml_5_pdf # ici choix
 source_name="aml_5" # "aml_5" "dsp2"
 
 # 4) Chunk strategies:
-chunk_stratégie=1 # 1 chaque article dans un chunk
-                  # 2 chaque article dans un chunk (format document avec metadonnées)
-                  # 3 Double chunk : 1 article dans 1 chunk (doc + meta) rechunké
-                  # Not use 4 chaque article ds doc + structure Chapitre sec...
+chunk_stratégie=2 # 1 1 article dans 1 chunk
+                  # 2 1 article dans 1 chunk (format document + metadonnées)
+                  # 3 2x chunk : 1 article dans 1 chunk (doc + meta) rechunké
 
 nbr_art=70 # nombre d'articles pour chunck
 
@@ -128,12 +127,14 @@ print("---------------------------------------")
 print("Début de l'étape 6.1: Chunking\n")
 
 # Modular 3 cases
-if chunk_stratégie == 1:
+if chunk_stratégie == 1: # chaque article dans un chunk
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
-elif chunk_stratégie == 2:
+
+elif chunk_stratégie == 2: # 1 article dans 1 chunk (format document avec metadonnées)
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
     chunks=chunker_2_doc(chunks, source_name)
-else:
+
+else: # Double : 1 article dans 1 chunk (doc + meta) rechunké
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
     chunks=chunker_2_doc(chunks, source_name)
     chunks=chunker_3_all(scrape_result_clean)
@@ -144,7 +145,11 @@ print("---------------------------------------")
 
 # étape 6.2: list to dict 
 print("Début de l'étape 6.2: Save chunks")
-save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}_strat_{chunk_stratégie}.json", chunks)
+if chunk_stratégie == 1 :
+    save_dict_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}_strat_{chunk_stratégie}.json", chunks)
+else:
+    save_doc_json(f"/Users/oussa/Desktop/Github_perso/Advanced_RAG/data_chunks/chunks_{source_name}_strat_{chunk_stratégie}.json", chunks)
+
 print("Fin de l'étape 6.2: Save chunks")
 print("---------------------------------------")
 
@@ -162,7 +167,7 @@ if source_exists_in_chroma_v3(chroma_db_path, source_name ,embedding_model,emb_m
     global chromasdb
     chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
     
-    
+
 else:
     print('Données non existentes dans ChromasDB, chargement en cours dans la base vectorielle...') 
     if chunk_stratégie == 1: # dict input

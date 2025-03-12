@@ -19,7 +19,7 @@ llm_4o = AzureChatOpenAI(
 
 llm_4omini = AzureChatOpenAI(
     azure_endpoint=os.getenv('Azure_OpenAI_OB_Endpoint_4mini'), 
-    openai_api_version="2024-10-21",   
+    openai_api_version="2024-07-18",   
     model_name="gpt-4o-mini",
     openai_api_key=os.getenv('Azure_OpenAI_OB_Key_4mini'), 
     openai_api_type="azure",

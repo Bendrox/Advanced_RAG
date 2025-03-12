@@ -92,33 +92,34 @@ def source_exists_in_chroma(chemin:str, chunk_stratégie, source_name, emb_model
  
      return len(docs) > 0
  
-def source_exists_in_chroma_v2(chemin:str, chunk_strat, source_name, emb_model_name, embedding_model):
+
+def source_exists_in_chroma_v3(chemin:str, source_name:str, embeddings, 
+                               emb_model_name:str, num_chunk_strat:int):
      """
      Vérifie si une source donnée existe déjà dans la base Chroma persistée.
+     
      Args:
          chemin (str): Dossier de persistance de Chroma.
          source_name (str): Nom de la source à chercher dans les métadonnées.
          embedding_model: Modèle d'embedding utilisé pour initier Chroma.
- 
-     Returns: True si la source est déjà indexée, False sinon.
+        num_chunk_strat (int): strat de chunk utilisée
+     Returns: True si la source est déjà indexée, sinonFalse.
      """
      
      # Charge la base Chroma existante
      chroma_db = Chroma(
          persist_directory=chemin,
-         #collection_name= f"Chunk_strat_{chunk_stratégie}_{emb_model_name}" , 
-         embedding_function=embedding_model)
+         embedding_function=embeddings)
  
      retriever = chroma_db.as_retriever()
-     docs = retriever.invoke("test", filter={
-        "$and": [
-            {"source": source_name},
-            {"Chunk_strat": chunk_strat},
-            {"Embeding_model": emb_model_name}
-        ]
+     docs = retriever.invoke("objectif de la directive ?", filter={
+        "$and": [ {"source": source_name}, 
+                 {"Embeding_model": emb_model_name},
+                 {"Chunk_strat": num_chunk_strat} ]
     })
  
      return len(docs) > 0
+
 
 def print_res(results:list):
     """Print output of similarity_search_with_relevance_scores
@@ -130,7 +131,7 @@ def print_res(results:list):
         print(f"\n *** Simil={score:.3f}, {doc.metadata} : {doc.page_content} ")
         
         
-        
+
 def input_chunks_chromasdb_v2(chunks_dict:dict, nom_source:str, embedding_model, emb_model_name :str,chroma_db_path:str, chunk_strat:str):
     """Input chunks dans une base vectorielle ChromaDB à partir d'un dict.  
     Approche orientée metadonnées
@@ -146,7 +147,9 @@ def input_chunks_chromasdb_v2(chunks_dict:dict, nom_source:str, embedding_model,
     """
     texts = list(chunks_dict.values())  # contenu des articles
     metadatas = [
-        {"source": nom_source, "article": article_id, "Chunk_strat":chunk_strat, "Embeding_model":emb_model_name }
+        {"source": nom_source, "article": article_id, 
+         "Chunk_strat":chunk_strat, 
+         "Embeding_model":emb_model_name }
         for article_id in chunks_dict.keys()
     ]
     #global chroma_db_art

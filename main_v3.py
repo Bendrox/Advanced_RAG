@@ -11,7 +11,7 @@ from llm_tools.chunker import (chunker_1_step_1,chunker_1_step_2
                                ,chunker_1_all,chunker_2_doc,
                                chunker_3_all, chunker_4, list_chunk_stat_token)
 from llm_tools.lcqa import get_eu_data_4p, get_eu_data_3p
-from models.llm_models import llm_4o, llm_4omini, llm_stream_response 
+from models.llm_models import llm_4omini, llm_41_mini, llm_stream_response 
 
 #importing for RAG
 from models.embedding_models import emb_3_large, funct_embedding_openai_3l

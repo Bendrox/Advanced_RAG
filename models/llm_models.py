@@ -5,28 +5,29 @@ from langchain_openai import AzureOpenAIEmbeddings
 
 from dotenv import load_dotenv
 import os
+load_dotenv()
 
-
-llm_4o = AzureChatOpenAI(
-    azure_endpoint=os.getenv('Azure_OpenAI_OB_Endpoint'), 
-    openai_api_version="2024-02-15-preview",
-    model_name="gpt-4o",
-    openai_api_key=os.getenv('Azure_OpenAI_OB_Key'), 
-    openai_api_type="azure",
-    temperature=0,
-    deployment_name="gpt-4o-deploy")
-    #streaming=True
 
 llm_4omini = AzureChatOpenAI(
-    azure_endpoint=os.getenv('Azure_OpenAI_OB_Endpoint_4mini'), 
-    openai_api_version="2024-07-18",   
-    model_name="gpt-4o-mini",
-    openai_api_key=os.getenv('Azure_OpenAI_OB_Key_4mini'), 
-    openai_api_type="azure",
+    azure_deployment="gpt-4o-mini",  # or your deployment
+    api_version="2025-01-01-preview",  # or your api version
     temperature=0,
-    deployment_name="gpt4o-mini")
-    #streaming=True
-    
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    # other params...
+)
+
+llm_41_mini = AzureChatOpenAI(
+    azure_deployment="gpt-4o-mini",  # or your deployment
+    api_version="2025-01-01-preview",  # or your api version
+    temperature=0,
+    max_tokens=None,
+    timeout=None,
+    max_retries=2,
+    # other params...
+)
+
 
 def llm_stream_response(model:str, prompt):
     "Envoi au llm et affiche réponse en direct"

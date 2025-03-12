@@ -23,3 +23,4 @@ def funct_embedding_openai_3l(input):
     """
     emb = emb_3_large.embed_query(input)
     return emb
+

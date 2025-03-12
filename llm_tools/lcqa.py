@@ -1,5 +1,5 @@
 from data_pipelines.str_diff_tools import comparer_phrases
-from models.llm_models import llm_4o
+from models.llm_models import llm_41_mini, llm_4omini
 
 
 def get_eu_data_3p(llm_model, reglement_ue, fr_old_version, fr_new_version):

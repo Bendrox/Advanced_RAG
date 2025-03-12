@@ -181,6 +181,13 @@ else:
         chromasdb.similarity_search_with_relevance_scores("", 5)       
 
     else: 
+        chromasdb = Chroma(
+        persist_directory= chroma_db_path,
+        embedding_function=embedding_model,
+        collection_metadata = {
+        "hnsw:space": "cosine",          
+        "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
+        "hnsw:M": 16})  # Nbr de co par vecteur)
         chromasdb.add_documents(chunks)
         
     

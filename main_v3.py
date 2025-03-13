@@ -133,7 +133,7 @@ if chunk_stratégie == 1: # chaque article dans un chunk
 
 elif chunk_stratégie == 2: # 1 article dans 1 chunk (format document avec metadonnées)
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
-    chunks=chunker_2_doc(chunks, source_name)
+    chunks_2=chunker_2_doc(chunks, source_name,emb_model_name,chunk_stratégie)
 
 else: # Double : 1 article dans 1 chunk (doc + meta) rechunké
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
@@ -164,7 +164,7 @@ print("Début de l'étape 6.3: Chunks embedding to vector database")
 # nom de la directive en metadonnées paramètre source 
 
 if source_exists_in_chroma_v3(chroma_db_path, source_name ,embedding_model,emb_model_name,chunk_stratégie):
-    print('Données existentes dans ChromasDB') 
+    print('Données existentes dans ChromasDB')
     global chromasdb
     chromasdb = load_existing_chromasdb(chroma_db_path, embedding_model)
     
@@ -179,7 +179,7 @@ else:
         "/Users/oussa/Desktop/Github_perso/Advanced_RAG/vector_store/chromasdb",
                                             1)
         print("Nombre de vecteurs de stratégie 1:", chromasdb._collection.count()) 
-        chromasdb.similarity_search_with_relevance_scores("", 5)       
+        chromasdb.similarity_search_with_relevance_scores("", 1)       
 
     else: 
         chromasdb = Chroma(
@@ -189,8 +189,8 @@ else:
         "hnsw:space": "cosine",          
         "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
         "hnsw:M": 16})  # Nbr de co par vecteur)
-        chromasdb.add_documents(chunks)
-        
+        chromasdb.add_documents(chunks_2) ####### rajouter emb_model + chunk strat dans "metadata"
+        chromasdb.similarity_search_with_relevance_scores("", 1)  
     
 print("Fin de l'étape 6.3: Chunks embedding to vector database, ")
 print("---------------------------------------")
@@ -200,8 +200,14 @@ print("Début de l'étape 6.4: QA article retreival similarity score")
 
 print(f"\nQuestion de l'utilisateur: {question}")
 print(f"\nRetreival result:\n")
-#qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
-qa_vector_chromasdb_simil_score_normal_v2(chromasdb,question,4,'aml_5', 'text-embedding-3-large', chunk_stratégie)
+if chunk_stratégie == 1 :
+    qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
+
+elif chunk_stratégie == 2: 
+    qa_vector_chromasdb_simil_score_normal_v2(chromasdb,question,4,'aml_5', 'text-embedding-3-large', chunk_stratégie)
+
+else: print("No retreival available")
+
 # intégrer pprint
 print("\nFin de l'étape 6.4: QA article retreival similarity score")
 print("---------------------------------------")

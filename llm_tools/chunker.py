@@ -65,7 +65,8 @@ def chunker_1_all(beginning: int, end:int, input_data_to_chunk: str) -> dict:
 
 # Chunker 2 : chaque article dans un chunk (format document avec metadonnées)
 
-def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str) -> dict:
+def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str, embedding_model_name:str,
+                   chunk_strat) -> dict:
     """
     ## Option Facultative : dict -> list of docs + metadata
     
@@ -80,7 +81,11 @@ def chunker_2_doc(chunks_UE_dict: dict, Directive_source:str) -> dict:
     for article_key, article_content in chunks_UE_dict.items():
         doc = Document(
             page_content=article_content.lstrip(), 
-            metadata={"Directive_source": Directive_source , "N°article ": article_key[7:].strip()}, 
+            metadata={"Directive_source": Directive_source , 
+                      "N°article ": article_key[7:].strip(),
+                      "embedding_model_name": embedding_model_name,
+                      "chunk_strat": chunk_strat
+                      }, 
             id=len(documents) + 1  # nombre de documents déjà créés 
         )
         documents.append(doc)

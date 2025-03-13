@@ -55,9 +55,9 @@ def qa_vector_chromasdb_simil_score_normal_v2(vector_chromasdb, question:str, k_
     results = vector_chromasdb.similarity_search_with_relevance_scores(query=question,
                                                             k=k_numer,
                                                             filter={
-        "$and": [ {"source": source_name}, 
-                 {"Embeding_model": emb_model_name},
-                 {"Chunk_strat": num_chunk_strat} ]
+        "$and": [ {"Directive_source": source_name}, 
+                 {"embedding_model_name": emb_model_name},
+                 {"chunk_strat": num_chunk_strat} ]
     })
     #return pprint(results)
     for doc, score in results:

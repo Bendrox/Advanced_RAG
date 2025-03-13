@@ -113,9 +113,9 @@ def source_exists_in_chroma_v3(chemin:str, source_name:str, embeddings,
  
      retriever = chroma_db.as_retriever()
      docs = retriever.invoke("objectif de la directive ?", filter={
-        "$and": [ {"source": source_name}, 
-                 {"Embeding_model": emb_model_name},
-                 {"Chunk_strat": num_chunk_strat} ]
+        "$and": [ {"Directive_source": source_name}, 
+                 {"embedding_model_name": emb_model_name},
+                 {"chunk_strat": num_chunk_strat} ]
     })
  
      return len(docs) > 0

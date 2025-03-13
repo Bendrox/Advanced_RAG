@@ -133,7 +133,7 @@ if chunk_stratégie == 1: # chaque article dans un chunk
 
 elif chunk_stratégie == 2: # 1 article dans 1 chunk (format document avec metadonnées)
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
-    chunks_2=chunker_2_doc(chunks, source_name,emb_model_name,chunk_stratégie)
+    chunks=chunker_2_doc(chunks, source_name,emb_model_name,chunk_stratégie)
 
 else: # Double : 1 article dans 1 chunk (doc + meta) rechunké
     chunks=chunker_1_all(1,nbr_art,scrape_result_clean)
@@ -189,7 +189,7 @@ else:
         "hnsw:space": "cosine",          
         "hnsw:construction_ef": 200, # Nbr de voisins explorés lors de l'ajout
         "hnsw:M": 16})  # Nbr de co par vecteur)
-        chromasdb.add_documents(chunks_2) ####### rajouter emb_model + chunk strat dans "metadata"
+        chromasdb.add_documents(chunks) 
         chromasdb.similarity_search_with_relevance_scores("", 1)  
     
 print("Fin de l'étape 6.3: Chunks embedding to vector database, ")
@@ -204,7 +204,9 @@ if chunk_stratégie == 1 :
     qa_vector_chromasdb_simil_score_normal(chromasdb,question,4,source_name)
 
 elif chunk_stratégie == 2: 
-    qa_vector_chromasdb_simil_score_normal_v2(chromasdb,question,4,'aml_5', 'text-embedding-3-large', chunk_stratégie)
+    qa_vector_chromasdb_simil_score_normal_v2(chromasdb,question,4,
+                                              'aml_5', 
+                                              'text-embedding-3-large', chunk_stratégie)
 
 else: print("No retreival available")
 
